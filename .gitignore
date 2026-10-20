@@ -8,3 +8,8 @@ uploads/
 *.sqlite-shm
 *.sqlite-wal
 npm-debug.log*
+
+.env
+node_modules/
+uploads/
+data/
