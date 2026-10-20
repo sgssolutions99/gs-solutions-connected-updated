@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Customer Login | SGS SOLUTIONS</title>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;min-height:100vh;display:grid;place-items:center;padding:18px;font-family:Arial,sans-serif;background:#f2f5eb;color:#1e3021}
+    .card{width:100%;max-width:440px;padding:clamp(22px,5vw,34px);background:#fff;border-radius:18px;box-shadow:0 12px 35px #00000012}
+    .logo{font-size:25px;font-weight:800}.logo span{color:#82ad24}
+    h1{margin:25px 0 8px;font-size:27px}
+    .sub{color:#687368;line-height:1.5;margin-bottom:22px}
+    label{display:block;margin:15px 0 7px;font-size:14px;font-weight:600}
+    input{width:100%;padding:13px;border:1px solid #d6ddcf;border-radius:9px;font-size:16px;outline-color:#82ad24}
+    button{width:100%;padding:14px;margin-top:18px;border:0;border-radius:9px;background:#c5eb70;color:#1e3021;font-size:15px;font-weight:700;cursor:pointer}
+    button:disabled{opacity:.6;cursor:wait}
+    .switch{background:#edf2e7;margin-top:10px}
+    #message{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14px;line-height:1.5}
+    .back{display:block;margin-top:18px;text-align:center;color:#45651d}
+    [hidden]{display:none!important}
+  </style>
+</head>
+<body>
+<main class="card">
+  <div class="logo">☀ SGS <span>SOLUTIONS</span></div>
+  <h1 id="title">Customer Login</h1>
+  <p class="sub" id="subtitle">Welcome back! Log in to manage your solar care services.</p>
+
+  <form id="authForm">
+    <div id="nameGroup" hidden>
+      <label for="name">Full Name</label>
+      <input id="name" name="name" autocomplete="name">
+    </div>
+
+    <div id="phoneGroup" hidden>
+      <label for="phone">Mobile Number</label>
+      <input id="phone" name="phone" type="tel" autocomplete="tel" maxlength="15">
+    </div>
+
+    <label for="identifier">Email or Mobile Number</label>
+    <input id="identifier" name="identifier" autocomplete="username"
+           placeholder="Email address or mobile number" required>
+
+    <div id="addressGroup" hidden>
+      <label for="address">Address</label>
+      <input id="address" name="address" autocomplete="street-address">
+    </div>
+
+    <label for="password">Password</label>
+    <input id="password" name="password" type="password"
+           autocomplete="current-password" minlength="8" required>
+
+    <button id="submitBtn" type="submit">Login</button>
+  </form>
+
+  <button id="switchBtn" class="switch" type="button">New customer? Create an account</button>
+  <p id="message" role="status" aria-live="polite"></p>
+
+  <a class="back" href="/partner-login.html">Service partner? Partner Login</a>
+  <a class="back" href="/">← Back to SGS SOLUTIONS</a>
+</main>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  let mode = "login";
+
+  function setMode(next) {
+    mode = next;
+    const registering = mode === "register";
+
+    $("title").textContent = registering ? "Create Customer Account" : "Customer Login";
+    $("subtitle").textContent = registering
+      ? "Create your account to manage solar services."
+      : "Welcome back! Log in to manage your solar care services.";
+
+    ["nameGroup", "phoneGroup", "addressGroup"].forEach(id => {
+      $(id).hidden = !registering;
+    });
+
+    $("name").required = registering;
+    $("phone").required = registering;
+    $("address").required = registering;
+    $("password").autocomplete = registering ? "new-password" : "current-password";
+    $("submitBtn").textContent = registering ? "Create Account" : "Login";
+    $("switchBtn").textContent = registering
+      ? "Already registered? Login"
+      : "New customer? Create an account";
+    $("message").textContent = "";
+  }
+
+  $("switchBtn").addEventListener("click", () => {
+    setMode(mode === "login" ? "register" : "login");
+  });
+
+  $("authForm").addEventListener("submit", async event => {
+    event.preventDefault();
+
+    const btn = $("submitBtn");
+    const message = $("message");
+    if (btn.disabled) return;
+
+    btn.disabled = true;
+    message.textContent = "Please wait...";
+
+    const identifier = $("identifier").value.trim();
+    const password = $("password").value;
+
+    try {
+      let endpoint, payload;
+
+      if (mode === "register") {
+        const phone = $("phone").value.trim();
+        payload = {
+          name: $("name").value.trim(),
+          email: identifier.includes("@") ? identifier : null,
+          phone: phone || (!identifier.includes("@") ? identifier : null),
+          address: $("address").value.trim(),
+          password
+        };
+        endpoint = "/api/auth/register";
+      } else {
+        payload = { identifier, password };
+        endpoint = "/api/auth/login";
+      }
+
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "same-origin",
+        body: JSON.stringify(payload)
+      });
+
+      const raw = await response.text();
+      let data;
+      try {
+        data = JSON.parse(raw);
+      } catch {
+        throw new Error(
+          response.ok
+            ? "Server returned an unexpected response. Check the backend API."
+            : `Server error (${response.status}). Check the server terminal.`
+        );
+      }
+
+      if (!response.ok) {
+        throw new Error(data.error || data.message || `Request failed (${response.status}).`);
+      }
+
+      if (!data.token || !data.user) {
+        throw new Error("Login API did not return the expected token and user.");
+      }
+
+      if (data.user.role !== "customer") {
+        throw new Error("This is not a customer account. Please use the correct portal.");
+      }
+
+      localStorage.setItem("sgs_token", data.token);
+      localStorage.setItem("sgs_user", JSON.stringify(data.user));
+
+      message.textContent = mode === "register"
+        ? "Account created. Opening your dashboard..."
+        : "Login successful. Opening your dashboard...";
+
+      window.location.assign("/customer-dashboard.html");
+    } catch (error) {
+      message.textContent = error.message ||
+        "Unable to connect. Make sure the backend server is running.";
+    } finally {
+      btn.disabled = false;
+    }
+  });
+
+  setMode("login");
+})();
+</script>
+</body>
+</html>

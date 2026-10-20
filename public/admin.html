@@ -1,0 +1,723 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SGS SOLUTIONS | Admin Dashboard</title>
+<style>
+:root {
+  --bg:#f4f7fb;
+  --card:#ffffff;
+  --text:#172033;
+  --muted:#718096;
+  --green:#13845b;
+  --green-dark:#086b48;
+  --border:#e4eaf1;
+  --red:#dc3545;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:Inter,Arial,sans-serif;
+  background:var(--bg);
+  color:var(--text);
+}
+button,input{font:inherit}
+button{cursor:pointer}
+.hidden{display:none!important}
+#loginPage{
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  background:linear-gradient(135deg,#082f26,#11684a,#1c9666);
+}
+.login-card{
+  width:100%;
+  max-width:410px;
+  background:white;
+  border-radius:20px;
+  padding:35px;
+  box-shadow:0 20px 60px #001c173d;
+}
+.logo{
+  width:54px;height:54px;
+  border-radius:15px;
+  background:#e0f6eb;
+  color:var(--green);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:19px;
+  margin-bottom:20px;
+}
+h1,h2,h3,p{margin-top:0}
+.login-card h1{font-size:25px;margin-bottom:8px}
+.subtitle{color:var(--muted);font-size:14px;line-height:1.6}
+.field{margin:20px 0}
+.field label{display:block;font-size:13px;font-weight:700;margin-bottom:8px}
+.field input{
+  width:100%;padding:13px 14px;border:1px solid var(--border);
+  border-radius:10px;outline:none;
+}
+.field input:focus{border-color:var(--green);box-shadow:0 0 0 3px #13845b18}
+.btn{
+  border:0;border-radius:10px;padding:12px 16px;
+  background:var(--green);color:white;font-weight:700;
+}
+.btn:hover{background:var(--green-dark)}
+.btn:disabled{opacity:.6;cursor:wait}
+.btn-full{width:100%}
+.error{color:var(--red);font-size:13px;margin-top:12px;line-height:1.5}
+#dashboard{min-height:100vh}
+.topbar{
+  background:#fff;border-bottom:1px solid var(--border);
+  padding:16px 4%;display:flex;align-items:center;
+  justify-content:space-between;gap:15px;flex-wrap:wrap;
+}
+.brand{display:flex;align-items:center;gap:12px;font-weight:900}
+.brand .logo{margin:0;width:43px;height:43px;font-size:15px}
+.brand small{display:block;font-size:11px;color:var(--muted);font-weight:500;margin-top:4px}
+.top-actions{display:flex;gap:10px;align-items:center}
+.btn-light{background:white;color:var(--text);border:1px solid var(--border)}
+.btn-light:hover{background:#f1f5f9}
+.btn-danger{background:#fff0f0;color:#c52e3b;border:1px solid #ffd7db}
+.btn-danger:hover{background:#ffe4e6}
+.main{max-width:1450px;margin:auto;padding:30px 4%}
+.welcome{
+  display:flex;justify-content:space-between;align-items:flex-start;
+  gap:15px;flex-wrap:wrap;margin-bottom:25px
+}
+.welcome h1{font-size:28px;margin-bottom:7px}
+.welcome p{color:var(--muted);margin-bottom:0;font-size:14px}
+.stats{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:17px;margin-bottom:25px
+}
+.stat{
+  background:var(--card);padding:22px;border-radius:15px;
+  border:1px solid var(--border);min-width:0
+}
+.stat-label{font-size:13px;color:var(--muted);font-weight:600}
+.stat-number{font-size:29px;font-weight:850;margin-top:12px;overflow-wrap:anywhere}
+.stat-note{font-size:12px;color:var(--muted);margin-top:7px}
+.panel{
+  background:white;border:1px solid var(--border);
+  border-radius:15px;margin-bottom:22px;overflow:hidden
+}
+.panel-head{
+  padding:20px 22px;display:flex;justify-content:space-between;
+  align-items:center;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--border)
+}
+.panel-head h2{font-size:17px;margin:0}
+.panel-head p{font-size:12px;color:var(--muted);margin:6px 0 0}
+.search{
+  width:240px;max-width:100%;padding:10px 12px;
+  border:1px solid var(--border);border-radius:9px;outline:none
+}
+.table-wrap{width:100%;overflow-x:auto}
+table{width:100%;border-collapse:collapse;min-width:750px}
+th,td{
+  text-align:left;padding:15px 18px;border-bottom:1px solid #edf1f5;
+  font-size:13px;vertical-align:top
+}
+th{background:#fafbfd;color:#657187;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+td{line-height:1.55}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:#fbfdfc}
+.badge{
+  display:inline-block;padding:5px 9px;border-radius:30px;
+  font-size:11px;font-weight:800;background:#e7f8ee;color:#117449;
+  text-transform:capitalize
+}
+.badge.new,.badge.pending{background:#fff3d6;color:#936200}
+.badge.closed,.badge.inactive{background:#edf0f5;color:#596579}
+.badge.rejected{background:#ffe8e8;color:#b42332}
+.empty{padding:35px;text-align:center;color:var(--muted);font-size:14px}
+.notice{
+  padding:13px 15px;background:#eaf7f0;color:#126342;
+  border-radius:10px;font-size:13px;margin-bottom:20px
+}
+#toast{
+  position:fixed;bottom:20px;right:20px;max-width:calc(100% - 40px);
+  background:#14251f;color:white;padding:14px 18px;border-radius:10px;
+  box-shadow:0 8px 25px #0002;z-index:10;font-size:13px
+}
+.footer{text-align:center;color:var(--muted);font-size:12px;padding:15px}
+@media(max-width:950px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:550px){
+  .main{padding:22px 4%}
+  .stats{gap:10px}
+  .stat{padding:16px}
+  .stat-number{font-size:23px}
+  .welcome h1{font-size:24px}
+  .login-card{padding:25px}
+  .topbar{padding:13px 4%}
+}
+.appointment-action{border:1px solid #d3dfc9;background:#f4f8ec;color:#234b28;border-radius:7px;padding:6px 9px;font-weight:700;cursor:pointer;font-size:12px}.appointment-action:disabled{opacity:.6;cursor:wait}
+</style>
+</head>
+<body>
+
+<!-- ADMIN LOGIN -->
+<section id="loginPage">
+  <div class="login-card">
+    <div class="logo">SGS</div>
+    <h1>Admin Login</h1>
+    <p class="subtitle">SGS SOLUTIONS · Secure administration panel</p>
+
+    <form id="loginForm">
+      <div class="field">
+        <label for="identifier">Admin Email or Phone</label>
+        <input id="identifier" name="identifier" type="text"
+          placeholder="Enter admin email" autocomplete="username" required>
+      </div>
+
+      <div class="field">
+        <label for="password">Password</label>
+        <input id="password" name="password" type="password"
+          placeholder="Enter your password" autocomplete="current-password" required>
+      </div>
+
+      <button class="btn btn-full" id="loginBtn" type="submit">Sign In to Dashboard</button>
+      <div id="loginError" class="error" role="alert"></div>
+    </form>
+    <p class="subtitle" style="margin:22px 0 0;font-size:12px">
+      Authorized administrators only.
+    </p>
+  </div>
+</section>
+
+<!-- ADMIN DASHBOARD -->
+<section id="dashboard" class="hidden">
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo">SGS</div>
+      <div>SGS SOLUTIONS<small>ADMINISTRATION PANEL</small></div>
+    </div>
+    <div class="top-actions">
+      <button class="btn btn-light" id="refreshBtn" type="button">↻ Refresh</button>
+      <button class="btn btn-danger" id="logoutBtn" type="button">Logout</button>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="welcome">
+      <div>
+        <h1>Dashboard Overview</h1>
+        <p>Manage your solar service enquiries and monitor business activity.</p>
+      </div>
+      <div class="subtitle" id="lastUpdated">Waiting for data...</div>
+    </div>
+
+    <div id="dashboardNotice" class="notice hidden"></div>
+
+    <section class="stats">
+      <div class="stat">
+        <div class="stat-label">Total Customers</div>
+        <div class="stat-number" id="customersCount">—</div>
+        <div class="stat-note">Registered customers</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Employees</div>
+        <div class="stat-number" id="employeesCount">—</div>
+        <div class="stat-note">Team records</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Open Tickets</div>
+        <div class="stat-number" id="ticketsCount">—</div>
+        <div class="stat-note">Tickets requiring attention</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">New Enquiries</div>
+        <div class="stat-number" id="enquiriesCount">—</div>
+        <div class="stat-note">Enquiries awaiting follow-up</div>
+      </div>
+    </section>
+
+    <section class="stats">
+      <div class="stat">
+        <div class="stat-label">Pending Payments</div>
+        <div class="stat-number" id="pendingPayments">—</div>
+        <div class="stat-note">Payment records awaiting action</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Revenue</div>
+        <div class="stat-number" id="revenue">—</div>
+        <div class="stat-note">Value reported by backend</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Partner Applications</div>
+        <div class="stat-number" id="partnersCount">—</div>
+        <div class="stat-note">Applications received</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Active Appointments</div>
+        <div class="stat-number" id="appointmentsCount">—</div>
+        <div class="stat-note">Pending or confirmed visits</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Total Enquiries</div>
+        <div class="stat-number" id="totalEnquiries">—</div>
+        <div class="stat-note">Recent enquiry records</div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div>
+          <h2>Customer Enquiries</h2>
+          <p>Website service enquiries received by SGS SOLUTIONS</p>
+        </div>
+        <input class="search" id="enquirySearch" type="search"
+          placeholder="Search name, phone or service...">
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Customer</th>
+              <th>Phone</th>
+              <th>Requirement</th>
+              <th>Status</th>
+              <th>Date</th>
+            </tr>
+          </thead>
+          <tbody id="enquiriesBody">
+            <tr><td colspan="6" class="empty">Loading enquiries...</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="enquiriesEmpty" class="empty hidden">No enquiries found.</div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div>
+          <h2>Appointment Requests</h2>
+          <p>Bookings submitted through the dedicated appointment page. Confirming or cancelling a slot updates availability.</p>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Ref</th><th>Customer</th><th>Contact</th><th>Service / Address</th><th>Date & time</th><th>Status / Actions</th></tr></thead>
+          <tbody id="appointmentsBody"><tr><td colspan="6" class="empty">Loading appointments...</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div>
+          <h2>Customers</h2>
+          <p>Registered customer accounts</p>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Status</th></tr></thead>
+          <tbody id="customersBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div>
+          <h2>Service Tickets</h2>
+          <p>Support and maintenance tickets</p>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Ticket</th><th>Customer</th><th>Issue</th><th>Status</th><th>Created</th></tr></thead>
+          <tbody id="ticketsBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div>
+          <h2>Payments</h2>
+          <p>Payment records reported by the backend</p>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Payment ID</th><th>Customer</th><th>Amount</th><th>Status</th><th>Date</th></tr></thead>
+          <tbody id="paymentsBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head">
+        <div>
+          <h2>Partner Applications</h2>
+          <p>Business partner applications</p>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Name</th><th>Email</th><th>Phone</th><th>Status</th></tr></thead>
+          <tbody id="partnersBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel" id="adminManagementPanel">
+      <div class="panel-head">
+        <div><h2>Create Another Administrator</h2><p>The first administrator is configured securely through the server environment. Only a signed-in admin can create additional admins here.</p></div>
+      </div>
+      <form id="createAdminForm" style="padding:20px;max-width:760px">
+        <div class="stats" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">
+          <div class="field"><label for="newAdminName">Full name</label><input id="newAdminName" name="name" required maxlength="120" autocomplete="name" placeholder="Administrator name"></div>
+          <div class="field"><label for="newAdminEmail">Email (recommended)</label><input id="newAdminEmail" name="email" type="email" autocomplete="email" placeholder="admin@example.com"></div>
+          <div class="field"><label for="newAdminPhone">Mobile number</label><input id="newAdminPhone" name="phone" type="tel" autocomplete="tel" placeholder="10-digit mobile"></div>
+          <div class="field"><label for="newAdminPassword">Temporary password (12+ characters)</label><input id="newAdminPassword" name="password" type="password" minlength="12" required autocomplete="new-password" placeholder="Create a strong password"></div>
+          <div class="field"><label for="currentAdminPassword">Your current admin password</label><input id="currentAdminPassword" name="currentPassword" type="password" required autocomplete="current-password" placeholder="Confirm it is you"></div>
+        </div>
+        <button class="btn" id="createAdminBtn" type="submit">Create Administrator</button>
+        <p id="createAdminMessage" role="status" class="subtitle" style="margin-top:14px;overflow-wrap:anywhere"></p>
+      </form>
+    </section>
+
+    <div class="footer">SGS SOLUTIONS · Your solar care experts</div>
+  </main>
+</section>
+
+<div id="toast" class="hidden" role="status"></div>
+
+<script>
+(() => {
+  "use strict";
+
+  const $ = id => document.getElementById(id);
+  const API = "/api";
+  let enquiriesCache = [];
+  let toastTimer;
+
+  function escapeHTML(value) {
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
+      "&":"&amp;", "<":"&lt;", ">":"&gt;",
+      '"':"&quot;", "'":"&#39;"
+    })[char]);
+  }
+
+  function showToast(message) {
+    const toast = $("toast");
+    toast.textContent = message;
+    toast.classList.remove("hidden");
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.add("hidden"), 3500);
+  }
+
+  function getToken() {
+    return sessionStorage.getItem("sgs_admin_token");
+  }
+
+  function setLoggedIn(isLoggedIn) {
+    $("loginPage").classList.toggle("hidden", isLoggedIn);
+    $("dashboard").classList.toggle("hidden", !isLoggedIn);
+  }
+
+  function clearSession() {
+    sessionStorage.removeItem("sgs_admin_token");
+    sessionStorage.removeItem("sgs_admin_user");
+    setLoggedIn(false);
+  }
+
+  async function api(path, options = {}) {
+    const headers = { ...(options.headers || {}) };
+    if (options.body) headers["Content-Type"] = "application/json";
+    if (getToken()) headers.Authorization = "Bearer " + getToken();
+
+    const response = await fetch(API + path, {
+      ...options,
+      headers,
+      cache: "no-store"
+    });
+
+    let data = {};
+    try { data = await response.json(); } catch (_) {}
+
+    if (response.status === 401 || response.status === 403) {
+      clearSession();
+      throw new Error(data.error || data.message || "Session expired or admin access denied. Please sign in again.");
+    }
+
+    if (!response.ok) {
+      throw new Error(data.error || data.message || "Request failed (" + response.status + ")");
+    }
+    return data;
+  }
+
+  function money(value) {
+    const amount = Number(value);
+    if (!Number.isFinite(amount)) return "₹" + String(value ?? "0");
+    return new Intl.NumberFormat("en-IN", {
+      style: "currency", currency: "INR", maximumFractionDigits: 2
+    }).format(amount);
+  }
+
+  function formatDate(value) {
+    if (!value) return "—";
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return String(value);
+    return date.toLocaleString("en-IN", {
+      day: "2-digit", month: "short", year: "numeric",
+      hour: "2-digit", minute: "2-digit"
+    });
+  }
+
+  function getStatus(item) {
+    return item?.status || item?.state || "unknown";
+  }
+
+  function statusBadge(status) {
+    const safeStatus = escapeHTML(status);
+    const cssStatus = String(status || "").toLowerCase().replace(/[^a-z0-9_-]/g, "");
+    return `<span class="badge ${cssStatus}">${safeStatus}</span>`;
+  }
+
+  function showRows(id, rows, emptyMessage, columns, renderer) {
+    const tbody = $(id);
+    if (!Array.isArray(rows) || rows.length === 0) {
+      tbody.innerHTML = `<tr><td colspan="${columns}" class="empty">${escapeHTML(emptyMessage)}</td></tr>`;
+      return;
+    }
+    tbody.innerHTML = rows.map(renderer).join("");
+  }
+
+  function renderEnquiries(rows) {
+    const tbody = $("enquiriesBody");
+    if (!rows.length) {
+      tbody.innerHTML = "";
+      $("enquiriesEmpty").classList.remove("hidden");
+      return;
+    }
+
+    $("enquiriesEmpty").classList.add("hidden");
+    tbody.innerHTML = rows.map(item => `
+      <tr>
+        <td>#${escapeHTML(item.id)}</td>
+        <td><strong>${escapeHTML(item.name)}</strong></td>
+        <td>${escapeHTML(item.phone)}</td>
+        <td style="min-width:220px;max-width:380px;white-space:pre-wrap">${escapeHTML(item.requirement)}</td>
+        <td>${statusBadge(item.status || "new")}</td>
+        <td>${escapeHTML(formatDate(item.created_at))}</td>
+      </tr>
+    `).join("");
+  }
+
+  function renderAppointments(items) {
+    const tbody = $("appointmentsBody");
+    if (!tbody) return;
+    if (!items.length) { tbody.innerHTML = '<tr><td colspan="6" class="empty">No appointment requests yet.</td></tr>'; return; }
+    tbody.innerHTML = items.map(a => {
+      const status = String(a.status || "pending");
+      const actions = status === "cancelled" || status === "completed" ? "—" : `
+        <div style="display:flex;gap:6px;flex-wrap:wrap">
+          ${status !== "confirmed" ? `<button type="button" class="appointment-action" data-id="${Number(a.id)}" data-status="confirmed">Confirm</button>` : ""}
+          ${status !== "completed" ? `<button type="button" class="appointment-action" data-id="${Number(a.id)}" data-status="completed">Complete</button>` : ""}
+          <button type="button" class="appointment-action" data-id="${Number(a.id)}" data-status="cancelled">Cancel</button>
+        </div>`;
+      return `<tr><td>#${escapeHTML(a.id)}</td><td><strong>${escapeHTML(a.name)}</strong><br><small>${escapeHTML(a.property_type || "")}</small></td><td>${escapeHTML(a.phone)}<br><small>${escapeHTML(a.customer_email || "")}</small></td><td>${escapeHTML(a.service)}<br><small>${escapeHTML(a.address)} · PIN ${escapeHTML(a.pincode)}</small></td><td>${escapeHTML(a.appointment_date)}<br>${escapeHTML(a.appointment_time)}</td><td>${statusBadge(status)}<br>${actions}</td></tr>`;
+    }).join("");
+    tbody.querySelectorAll(".appointment-action").forEach(button => button.addEventListener("click", async () => {
+      const oldText = button.textContent; button.disabled = true; button.textContent = "Saving…";
+      try { await api(`/admin/appointments/${button.dataset.id}/status`, {method:"PATCH", body:JSON.stringify({status:button.dataset.status})}); await loadDashboard(); }
+      catch (error) { showToast(error.message || "Could not update appointment."); button.disabled = false; button.textContent = oldText; }
+    }));
+  }
+
+  function renderTableData(data) {
+    const stats = data.stats || {};
+    const enquiries = Array.isArray(data.enquiries) ? data.enquiries : [];
+    const customers = Array.isArray(data.customers) ? data.customers : [];
+    const employees = Array.isArray(data.employees) ? data.employees : [];
+    const tickets = Array.isArray(data.tickets) ? data.tickets : [];
+    const payments = Array.isArray(data.payments) ? data.payments : [];
+    const partners = Array.isArray(data.partnerApplications) ? data.partnerApplications : [];
+    const appointments = Array.isArray(data.appointments) ? data.appointments : [];
+
+    $("customersCount").textContent = stats.customers ?? customers.length;
+    $("employeesCount").textContent = stats.employees ?? employees.length;
+    $("ticketsCount").textContent = stats.openTickets ?? tickets.filter(t => !["closed","resolved"].includes(String(getStatus(t)).toLowerCase())).length;
+    $("enquiriesCount").textContent = enquiries.filter(e => ["new","pending"].includes(String(e.status || "new").toLowerCase())).length;
+    $("pendingPayments").textContent = stats.pendingPayments ?? payments.filter(p => String(getStatus(p)).toLowerCase() === "pending").length;
+    $("revenue").textContent = money(stats.revenue ?? 0);
+    $("partnersCount").textContent = partners.length;
+    $("totalEnquiries").textContent = enquiries.length;
+    const appointmentStat = document.getElementById("appointmentsCount");
+    if (appointmentStat) appointmentStat.textContent = stats.appointments ?? appointments.filter(a => ["pending", "confirmed"].includes(a.status)).length;
+    renderAppointments(appointments);
+
+    enquiriesCache = enquiries;
+    renderEnquiries(enquiriesCache);
+
+    showRows("customersBody", customers, "No customer records found.", 4, c => `
+      <tr>
+        <td>${escapeHTML(c.name || c.full_name || "—")}</td>
+        <td>${escapeHTML(c.email || "—")}</td>
+        <td>${escapeHTML(c.phone || "—")}</td>
+        <td>${statusBadge(c.active === 0 || c.active === false ? "inactive" : (c.status || "active"))}</td>
+      </tr>
+    `);
+
+    showRows("ticketsBody", tickets, "No tickets found.", 5, t => `
+      <tr>
+        <td>#${escapeHTML(t.id ?? t.ticket_id ?? "—")}</td>
+        <td>${escapeHTML(t.customer_name || t.name || t.customer_id || "—")}</td>
+        <td>${escapeHTML(t.subject || t.title || t.description || t.issue || "—")}</td>
+        <td>${statusBadge(getStatus(t))}</td>
+        <td>${escapeHTML(formatDate(t.created_at || t.createdAt))}</td>
+      </tr>
+    `);
+
+    showRows("paymentsBody", payments, "No payment records found.", 5, p => `
+      <tr>
+        <td>#${escapeHTML(p.id ?? p.payment_id ?? "—")}</td>
+        <td>${escapeHTML(p.customer_name || p.name || p.customer_id || "—")}</td>
+        <td>${escapeHTML(money(p.amount ?? p.total ?? 0))}</td>
+        <td>${statusBadge(getStatus(p))}</td>
+        <td>${escapeHTML(formatDate(p.created_at || p.createdAt))}</td>
+      </tr>
+    `);
+
+    showRows("partnersBody", partners, "No partner applications found.", 4, p => `
+      <tr>
+        <td>${escapeHTML(p.name || p.business_name || "—")}</td>
+        <td>${escapeHTML(p.email || "—")}</td>
+        <td>${escapeHTML(p.phone || "—")}</td>
+        <td>${statusBadge(getStatus(p))}</td>
+      </tr>
+    `);
+
+    $("lastUpdated").textContent = "Updated " + new Date().toLocaleTimeString("en-IN");
+  }
+
+  async function loadDashboard() {
+    $("refreshBtn").disabled = true;
+    $("refreshBtn").textContent = "Loading...";
+    $("dashboardNotice").classList.add("hidden");
+
+    try {
+      const data = await api("/admin/overview");
+      renderTableData(data);
+    } catch (error) {
+      $("dashboardNotice").textContent = error.message;
+      $("dashboardNotice").classList.remove("hidden");
+      if (getToken()) showToast(error.message);
+    } finally {
+      $("refreshBtn").disabled = false;
+      $("refreshBtn").textContent = "↻ Refresh";
+    }
+  }
+
+  $("loginForm").addEventListener("submit", async event => {
+    event.preventDefault();
+    const button = $("loginBtn");
+    const errorBox = $("loginError");
+    errorBox.textContent = "";
+    button.disabled = true;
+    button.textContent = "Signing in...";
+
+    try {
+      const identifier = $("identifier").value.trim();
+      const password = $("password").value;
+
+      const result = await fetch(API + "/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ identifier, password }),
+        cache: "no-store"
+      });
+
+      let data = {};
+      try { data = await result.json(); } catch (_) {}
+
+      if (!result.ok) throw new Error(data.error || data.message || "Login failed.");
+
+      if (!data.token || !data.user) {
+        throw new Error("Server login response is incomplete.");
+      }
+
+      if (data.user.role !== "admin") {
+        throw new Error("This account is not an admin account.");
+      }
+
+      sessionStorage.setItem("sgs_admin_token", data.token);
+      sessionStorage.setItem("sgs_admin_user", JSON.stringify(data.user));
+      $("password").value = "";
+      setLoggedIn(true);
+      await loadDashboard();
+    } catch (error) {
+      errorBox.textContent = error.message || "Unable to sign in.";
+    } finally {
+      button.disabled = false;
+      button.textContent = "Sign In to Dashboard";
+    }
+  });
+
+  $("createAdminForm").addEventListener("submit", async event => {
+    event.preventDefault();
+    const button = $("createAdminBtn");
+    const message = $("createAdminMessage");
+    message.textContent = "Creating administrator...";
+    button.disabled = true;
+    try {
+      const payload = {
+        name: $("newAdminName").value.trim(),
+        email: $("newAdminEmail").value.trim() || null,
+        phone: $("newAdminPhone").value.trim() || null,
+        password: $("newAdminPassword").value,
+        currentPassword: $("currentAdminPassword").value
+      };
+      const data = await api("/admin/admins", { method: "POST", body: JSON.stringify(payload) });
+      message.textContent = data.message + " Share the login details securely; do not send the password in plain text.";
+      $("createAdminForm").reset();
+      showToast("Administrator account created.");
+    } catch (error) {
+      message.textContent = error.message || "Unable to create administrator.";
+    } finally {
+      button.disabled = false;
+    }
+  });
+
+  $("refreshBtn").addEventListener("click", loadDashboard);
+
+  $("logoutBtn").addEventListener("click", () => {
+    clearSession();
+    $("loginError").textContent = "";
+    $("identifier").value = "";
+    $("password").value = "";
+    showToast("You have been logged out.");
+  });
+
+  $("enquirySearch").addEventListener("input", event => {
+    const query = event.target.value.trim().toLowerCase();
+    const filtered = enquiriesCache.filter(item =>
+      [item.id, item.name, item.phone, item.requirement, item.status, item.created_at]
+        .some(value => String(value ?? "").toLowerCase().includes(query))
+    );
+    renderEnquiries(filtered);
+  });
+
+  async function init() {
+    if (!getToken()) {
+      setLoggedIn(false);
+      return;
+    }
+
+    setLoggedIn(true);
+    await loadDashboard();
+  }
+
+  init();
+})();
+</script>
+</body>
+</html>

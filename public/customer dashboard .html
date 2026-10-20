@@ -1,0 +1,180 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Customer Dashboard | SGS SOLUTIONS</title>
+  <style>
+    *{box-sizing:border-box}
+    body{margin:0;background:#f3f6ee;color:#203323;font-family:Arial,sans-serif}
+    header{background:#fff;border-bottom:1px solid #e2e8dc;padding:16px 5%;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+    .logo{font-size:22px;font-weight:800}.logo span{color:#82ad24}
+    button,.btn{border:0;border-radius:9px;padding:12px 16px;background:#c5eb70;color:#203323;font-weight:700;cursor:pointer;text-decoration:none;display:inline-block}
+    main{max-width:1100px;margin:auto;padding:26px 18px}
+    .welcome{margin-bottom:22px}
+    .muted{color:#687368;line-height:1.5}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+    .card{background:#fff;border:1px solid #e5eadf;border-radius:15px;padding:20px;min-width:0;overflow-wrap:anywhere}
+    h1{font-size:clamp(25px,4vw,34px);margin:0 0 8px}
+    h2{font-size:19px;margin:0 0 12px}
+    .status{padding:12px;border-radius:9px;background:#edf2e7;white-space:pre-wrap;overflow-wrap:anywhere}
+    .value{font-size:22px;font-weight:700}
+    @media(max-width:650px){.grid{grid-template-columns:1fr}header{padding:14px}main{padding:20px 14px}.card{padding:17px}}
+  </style>
+</head>
+<body>
+<header>
+  <div class="logo">☀ SGS <span>SOLUTIONS</span></div>
+  <button id="logoutBtn" type="button">Logout</button>
+</header>
+
+<main>
+  <section class="welcome">
+    <h1>Customer Dashboard</h1>
+    <p class="muted" id="welcomeText">Loading your account...</p>
+  </section>
+
+  <p class="status" id="status" role="status" aria-live="polite">Verifying your session...</p>
+
+  <section class="grid" style="margin-top:18px">
+    <article class="card">
+      <h2>My Account</h2>
+      <p><strong>Name:</strong> <span id="customerName">—</span></p>
+      <p><strong>Email:</strong> <span id="customerEmail">—</span></p>
+      <p><strong>Mobile:</strong> <span id="customerPhone">—</span></p>
+    </article>
+
+    <article class="card">
+      <h2>My Plan</h2>
+      <p class="value" id="planName">—</p>
+      <p class="muted" id="planDetails">Plan details will appear here when supplied by the backend.</p>
+    </article>
+
+    <article class="card">
+      <h2>My Appointments</h2>
+      <div id="appointments" class="muted">Loading appointments...</div>
+      <p><a class="btn" href="/booking.html">Book an Appointment</a></p>
+    </article>
+
+    <article class="card">
+      <h2>Service Tickets</h2>
+      <div id="tickets" class="muted">Loading service tickets...</div>
+    </article>
+
+    <article class="card">
+      <h2>Payment History</h2>
+      <div id="payments" class="muted">Loading payments...</div>
+    </article>
+
+    <article class="card">
+      <h2>Notifications</h2>
+      <div id="notifications" class="muted">Loading notifications...</div>
+    </article>
+  </section>
+</main>
+
+<script>
+(() => {
+  const $ = id => document.getElementById(id);
+  const token = localStorage.getItem("sgs_token");
+
+  function logout() {
+    localStorage.removeItem("sgs_token");
+    localStorage.removeItem("sgs_user");
+    window.location.replace("/customer-login.html");
+  }
+
+  $("logoutBtn").addEventListener("click", logout);
+
+  if (!token) {
+    window.location.replace("/customer-login.html");
+    return;
+  }
+
+  function showList(id, items, emptyText) {
+    const target = $(id);
+    target.replaceChildren();
+
+    if (!Array.isArray(items) || items.length === 0) {
+      target.textContent = emptyText;
+      return;
+    }
+
+    items.forEach(item => {
+      const row = document.createElement("p");
+      const title = item.title || item.planName || item.status ||
+                    item.subject || item.serviceType || item._id || "Record";
+      const detail = item.date || item.appointmentDate || item.createdAt || "";
+      row.textContent = detail ? `${title} — ${detail}` : String(title);
+      target.appendChild(row);
+    });
+  }
+
+  async function api(path) {
+    const response = await fetch(path, {
+      headers: { "Authorization": `Bearer ${token}` },
+      credentials: "same-origin"
+    });
+
+    const raw = await response.text();
+    let data;
+    try { data = JSON.parse(raw); }
+    catch { throw new Error(`Unexpected response from ${path} (${response.status}).`); }
+
+    if (!response.ok) {
+      throw new Error(data.error || data.message || `Request failed (${response.status}).`);
+    }
+    return data;
+  }
+
+  async function loadDashboard() {
+    try {
+      const me = await api("/api/auth/me");
+      const user = me.user || me;
+
+      if (user.role !== "customer") {
+        logout();
+        return;
+      }
+
+      $("customerName").textContent = user.name || "—";
+      $("customerEmail").textContent = user.email || "—";
+      $("customerPhone").textContent = user.phone || user.mobile || "—";
+      $("welcomeText").textContent = `Welcome, ${user.name || "Customer"}!`;
+
+      try {
+        const result = await api("/api/customer/dashboard");
+        const data = result.dashboard || result.data || result;
+
+        $("planName").textContent = data.plan?.name || data.planName || "No active plan";
+        $("planDetails").textContent = data.plan?.details ||
+          "Your active plan details will appear here.";
+
+        showList("appointments", data.appointments, "No appointments found.");
+        showList("tickets", data.tickets || data.serviceTickets, "No service tickets found.");
+        showList("payments", data.payments, "No payment records found.");
+        showList("notifications", data.notifications, "No notifications found.");
+
+        $("status").textContent = "Your account is connected.";
+      } catch (dashboardError) {
+        $("status").textContent =
+          "Your login is verified, but the dashboard data API could not load: " +
+          dashboardError.message +
+          "\nCheck whether /api/customer/dashboard exists in server.js.";
+        showList("appointments", [], "Dashboard API unavailable.");
+        showList("tickets", [], "Dashboard API unavailable.");
+        showList("payments", [], "Dashboard API unavailable.");
+        showList("notifications", [], "Dashboard API unavailable.");
+      }
+    } catch (error) {
+      $("status").textContent = "Session verification failed: " + error.message;
+      if (/401|403|unauthorized|token/i.test(error.message)) logout();
+    }
+  }
+
+  loadDashboard();
+})();
+</script>
+</body>
+</html>

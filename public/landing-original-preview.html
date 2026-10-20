@@ -1,0 +1,423 @@
+Bhai, poora code ek message mein daalne par cut ho sakta hai. Isliye main ise parts mein bhejunga. **Neeche wala code `index.html` ki shuruaat mein paste kar:**
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SGS SOLUTION | Solar Made Simple</title>
+<meta name="description" content="Solar installation, maintenance and customer care plans by SGS SOLUTION.">
+<meta name="theme-color" content="#183b25">
+<style>
+:root {
+  --ink: #183b25;
+  --muted: #526653;
+  --green: #26743b;
+  --lime: #ffdf3f;
+  --cream: #f2f8e8;
+  --white: #f7fbe9;
+  --line: #d3e3c4;
+  --orange: #ffb34d;
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  color: var(--ink);
+  background: var(--cream);
+}
+a {
+  color: inherit;
+  text-decoration: none;
+}
+button {
+  font: inherit;
+  cursor: pointer;
+}
+.topbar {
+  background: #183b25;
+  color: #f8fbe9;
+  font-size: 12px;
+  padding: 9px 5vw;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(246,247,239,.95);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid #d8e8c7;
+}
+.nav {
+  max-width: 1200px;
+  margin: auto;
+  padding: 14px 22px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: 900;
+  font-size: 17px;
+  white-space: nowrap;
+}
+.logo {
+  width: 36px;
+  height: 36px;
+  background: var(--lime);
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  font-size: 21px;
+}
+.navlinks {
+  display: flex;
+  gap: 18px;
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 700;
+}
+.navactions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.btn {
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 18px;
+  font-weight: 750;
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: .2s;
+}
+.btn:hover {
+  transform: translateY(-2px);
+}
+.btn-dark {
+  background: var(--ink);
+  color: white;
+}
+.btn-lime {
+  background: var(--lime);
+  color: var(--ink);
+}
+.btn-outline {
+  border: 1px solid #b9d3a6;
+  background: transparent;
+  color: var(--ink);
+}
+.menu-wrap {
+  position: relative;
+}
+.menu-btn {
+  border: 1px solid var(--line);
+  background: var(--white);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 21px;
+}
+.dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 43px;
+  width: 190px;
+  padding: 6px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  box-shadow: 0 16px 35px #12251d24;
+  z-index: 40;
+}
+.dropdown.open {
+  display: block;
+}
+.dropdown button {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: transparent;
+  text-align: left;
+  padding: 10px;
+  border-radius: 8px;
+}
+.hero {
+  max-width: 1200px;
+  margin: auto;
+  padding: 56px 24px 45px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 45px;
+  align-items: center;
+}
+.hero h1 {
+  font-size: clamp(42px, 5.2vw, 68px);
+  line-height: .99;
+  letter-spacing: -3px;
+}
+.hero h1 em {
+  color: var(--green);
+  font-style: normal;
+}
+.hero p {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.75;
+}
+.hero-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 26px 0;
+}
+.visual {
+  height: 430px;
+  position: relative;
+  border-radius: 32px;
+  overflow: hidden;
+  background: linear-gradient(140deg, #fbe5a1, #9bb8ee 45%, #87b95a);
+  box-shadow: 0 30px 70px #164a3024;
+}
+.visual:before {
+  content: "";
+  position: absolute;
+  width: 290px;
+  height: 290px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff5c7, #ffc247 65%, transparent 70%);
+  right: 35px;
+  top: 20px;
+}
+.sun {
+  position: absolute;
+  right: 104px;
+  top: 76px;
+  width: 135px;
+  height: 135px;
+  border-radius: 50%;
+  background: #ffc247;
+  box-shadow: 0 0 60px #ffda7d90;
+}
+.hills {
+  position: absolute;
+  bottom: -20px;
+  width: 120%;
+  height: 180px;
+  left: -10%;
+  background: #4b8d42;
+  border-radius: 50% 50% 0 0;
+}
+.hills.two {
+  height: 130px;
+  bottom: -25px;
+  background: #2d6639;
+  left: -4%;
+  width: 115%;
+}
+.house {
+  position: absolute;
+  bottom: 84px;
+  left: 22%;
+  width: 205px;
+  height: 128px;
+  background: #f7f5e8;
+}
+.roof {
+  position: absolute;
+  bottom: 205px;
+  left: 18%;
+  width: 225px;
+  height: 100px;
+  background: #244d2e;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+.roofpanel {
+  position: absolute;
+  bottom: 216px;
+  left: 28%;
+  width: 126px;
+  height: 65px;
+  transform: skew(-22deg) rotate(-8deg);
+  background: repeating-linear-gradient(90deg, #285b35 0 29px, #7aa8d8 30px 32px);
+  border: 3px solid #d1edf1;
+}
+.float-card {
+  position: absolute;
+  z-index: 3;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 15px 17px;
+  box-shadow: 0 14px 35px #143e2a22;
+}
+.saving {
+  top: 34px;
+  left: 24px;
+}
+.stat-card {
+  right: 20px;
+  bottom: 30px;
+}
+.strip {
+  background: var(--white);
+  border-block: 1px solid var(--line);
+  padding: 20px 24px;
+}
+.strip-inner {
+  max-width: 1150px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+section.content {
+  max-width: 1200px;
+  margin: auto;
+  padding: 86px 24px;
+}
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  align-items: end;
+  margin-bottom: 32px;
+}
+.section-head h2 {
+  font-size: clamp(30px, 4vw, 45px);
+}
+.services, .plans-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 17px;
+}
+.service, .plan {
+  background: var(--white);
+  border: 1px solid var(--line);
+  padding: 25px;
+  border-radius: 22px;
+}
+.service p, .plan p {
+  color: var(--muted);
+  line-height: 1.7;
+}
+.plans-section {
+  background: #eaf3df;
+}
+.plans-inner {
+  max-width: 1200px;
+  margin: auto;
+  padding: 80px 24px;
+}
+.plan.featured {
+  background: #e7f3ce;
+  border-color: #b7d78c;
+}
+.price {
+  font-size: 37px;
+  font-weight: 900;
+  color: var(--green);
+}
+.plan ul {
+  list-style: none;
+  padding: 12px 0;
+}
+.plan li {
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line);
+}
+.plan li:before {
+  content: "✓ ";
+  color: #d58b12;
+  font-weight: 900;
+}
+.process {
+  display: grid;
+  grid-template-columns: .85fr 1.15fr;
+  gap: 45px;
+  align-items: center;
+}
+.process-panel {
+  background: #214b2d;
+  color: white;
+  border-radius: 28px;
+  padding: 32px;
+}
+.cta {
+  max-width: 1152px;
+  margin: 0 auto 80px;
+  padding: 38px 42px;
+  border-radius: 28px;
+  background: var(--lime);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+}
+footer {
+  background: #183b25;
+  color: var(--white);
+  padding: 48px 24px 22px;
+}
+.modal-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: #0b2119a8;
+  display: none;
+  place-items: center;
+  padding: 20px;
+}
+.modal-bg.show {
+  display: grid;
+}
+.modal {
+  background: var(--white);
+  border-radius: 25px;
+  width: min(440px, 100%);
+  padding: 28px;
+  position: relative;
+}
+.field {
+  display: block;
+  margin: 14px 0;
+}
+.field input, .field select {
+  width: 100%;
+  border: 1px solid #c7dcb4;
+  border-radius: 12px;
+  padding: 13px;
+  background: #fbfde9;
+  color: #173a24;
+}
+@media(max-width:900px) {
+  .navlinks { display: none; }
+  .hero, .process { grid-template-columns: 1fr; }
+  .services, .plans-grid { grid-template-columns: 1fr 1fr; }
+  .strip-inner { grid-template-columns: 1fr 1fr; }
+}
+@media(max-width:620px) {
+  .hero { padding: 35px 18px; }
+  .visual { height: 330px; }
+  .services, .plans-grid { grid-template-columns: 1fr; }
+  .section-head { display: block; }
+  .cta { margin: 20px; flex-direction: column; align-items: flex-start; }
+}
+</style>

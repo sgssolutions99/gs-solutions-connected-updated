@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#d8ef35">
+<title>SGS SOLUTIONS | Solar Care & Maintenance</title>
+<style>
+:root{--lime:#d8ef35;--green:#173b25;--ink:#17251b;--muted:#657267;--paper:#f6f8f1;--line:#e1e8dc}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif;line-height:1.55}
+a{text-decoration:none;color:inherit}
+button,input,select,textarea{font:inherit}
+button{cursor:pointer}
+.wrap{width:min(1160px,92%);margin:auto}
+header{position:sticky;top:0;z-index:20;background:#fffF;border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:10px;font-size:19px;font-weight:900;white-space:nowrap}
+.logo{display:grid;place-items:center;width:43px;height:43px;background:var(--lime);border-radius:13px;font-size:25px}
+.navlinks{display:flex;align-items:center;gap:23px;font-weight:700;font-size:14px}
+.navlinks a:hover{color:#688b16}
+.navright{display:flex;align-items:center;gap:12px}
+.menu{position:relative}
+.menu-btn{width:45px;height:45px;border:0;border-radius:12px;background:var(--green);color:white;font-size:25px}
+.login-menu{display:none;position:absolute;right:0;top:54px;width:220px;padding:8px;background:white;border:1px solid var(--line);border-radius:14px;box-shadow:0 12px 35px #0002}
+.login-menu.open{display:grid}
+.login-menu button{border:0;background:white;text-align:left;padding:13px;border-radius:8px;font-weight:700;color:var(--green)}
+.login-menu button:hover{background:#f0f5e5}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:13px 20px;border:0;border-radius:10px;font-weight:800;transition:.2s}
+.btn:hover{transform:translateY(-2px)}
+.lime{background:var(--lime);color:#17251b}
+.dark{background:var(--green);color:white}
+.outline{background:transparent;border:1px solid currentColor;color:inherit}
+.hero{position:relative;height:540px;overflow:hidden;background:#102016;color:white}
+.slides,.slide{position:absolute;inset:0}
+.slide{opacity:0;visibility:hidden;background-size:cover;background-position:center;transform:scale(1.035);transition:opacity 1.5s ease,transform 1.5s ease,visibility 1.5s}
+.slide.active{opacity:1;visibility:visible;transform:scale(1)}
+.slide:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#07170ee8,#07170e88 47%,#07170e08),linear-gradient(0deg,#07170e55,transparent 55%)}
+.hero-content{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;height:100%;padding-bottom:10px}
+.hero h1{font-size:clamp(42px,6vw,76px);line-height:1.02;letter-spacing:-3px;max-width:700px;margin:0 0 18px}
+.hero h1 span{color:var(--lime)}
+.hero p{max-width:520px;font-size:18px;color:#f2f6ef}
+.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:15px}
+.hero .outline{border-color:#fff}
+.hero .free-label{display:inline-block;background:var(--lime);color:#17251b;border-radius:10px;padding:9px 15px;font-weight:900;margin-bottom:18px}
+.arrows{position:absolute;z-index:4;top:50%;left:0;right:0;display:flex;justify-content:space-between;padding:0 18px;pointer-events:none}
+.arrows button{pointer-events:auto;border:1px solid #ffffff90;background:#102016b5;color:white;border-radius:50%;width:44px;height:44px;font-size:23px}
+.dots{position:absolute;z-index:4;bottom:18px;left:50%;transform:translateX(-50%);display:flex;gap:8px}
+.dots button{width:11px;height:11px;padding:0;border:0;border-radius:50%;background:#ffffff90}
+.dots button.active{background:var(--lime);transform:scale(1.25)}
+.trust{background:#edf4e5;padding:20px 0}
+.trust .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-weight:750;font-size:14px}
+.trust span:before{content:"✓";color:#5e811c;font-weight:900;margin-right:8px}
+section{padding:58px 0}
+.kicker{font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:1.4px;color:#648325}
+h2{font-size:clamp(30px,4vw,44px);line-height:1.1;letter-spacing:-1.5px;margin:8px 0 12px}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:24px}
+.section-head p{max-width:440px;color:var(--muted)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:white;border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.card img{width:100%;height:190px;object-fit:cover;display:block}
+.card-body{padding:18px}
+.card h3{margin:0 0 6px}
+.card p{margin:0;color:var(--muted);font-size:14px}
+.availability{display:grid;grid-template-columns:1fr 1.15fr;gap:25px;align-items:center;background:var(--green);color:white;padding:30px;border-radius:22px}
+.availability p{color:#d9e5d7}
+.white-panel{background:white;color:var(--ink);padding:22px;border-radius:16px}
+.field{display:flex;flex-direction:column;gap:6px;margin:12px 0}
+.field label{font-weight:750;font-size:14px}
+.field input,.field select,.field textarea{width:100%;padding:12px;border:1px solid #dce4d8;border-radius:10px;background:white;color:var(--ink)}
+.field input:focus,.field select:focus,.field textarea:focus{outline:2px solid #d8ef35}
+.status{font-size:14px;font-weight:700;margin-top:10px}
+.good{color:#24743b}
+.bad{color:#a25b14}
+.plan-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:24px 0 30px}
+.plan-card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:24px;box-shadow:0 8px 24px #173b2508}
+.plan-card h3{font-size:23px;margin:8px 0}
+.plan-card ul{padding-left:20px;color:var(--muted)}
+.plan-card .plan-price{font-size:29px;font-weight:900;color:var(--green);margin:12px 0}
+.plan-card .small{display:block;margin-bottom:14px}
+.plan-layout{display:grid;grid-template-columns:1.2fr .8fr;gap:22px;align-items:start}
+.panel,.summary{padding:25px;background:white;border:1px solid var(--line);border-radius:20px}
+.panel h3{margin:12px 0}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:0 14px}
+.summary{background:#edf4e5;position:sticky;top:95px}
+.summary-row{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid #d7e2ce}
+.summary-row span{color:var(--muted)}
+.summary-row strong{text-align:right}
+.price{font-size:34px;font-weight:900;letter-spacing:-1px;margin:18px 0 4px;color:var(--green)}
+.note{font-size:13px;color:var(--muted)}
+.free-box{background:white;border-radius:14px;padding:17px;margin-top:20px}
+.free-box p{font-size:14px;color:var(--muted)}
+.summary .btn{width:100%;margin-top:10px}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center}
+.about-grid img{width:100%;height:340px;object-fit:cover;border-radius:20px}
+.about-copy p{color:var(--muted)}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
+.why-card{background:white;border:1px solid var(--line);border-radius:16px;padding:20px}
+.why-icon{display:grid;place-items:center;width:47px;height:47px;background:var(--lime);border-radius:14px;font-size:23px}
+.why-card h3{margin:12px 0 5px}
+.why-card p{font-size:14px;color:var(--muted);margin:0}
+footer{background:#122b1b;color:white;padding:35px 0}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:25px}
+footer p,footer a{color:#d1ddce;font-size:14px}
+.modal{display:none;position:fixed;z-index:50;inset:0;padding:clamp(8px,3vw,20px);background:#0009;align-items:flex-start;justify-content:center;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.modal.open{display:flex}
+.modal-box{position:relative;background:white;width:min(520px,100%);padding:clamp(16px,4vw,25px);border-radius:20px;margin:auto 0;max-height:none;min-width:0;overflow:visible}
+.close{position:absolute;right:12px;top:10px;border:0;background:#edf3e5;border-radius:50%;width:38px;height:38px;font-size:23px}
+.small{font-size:12px;color:var(--muted)}
+.booking-box{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fbfcf8;margin:14px 0}
+.booking-step{display:flex;align-items:center;gap:10px;margin:2px 0 12px;font-weight:850}
+.step-number{display:grid;place-items:center;min-width:28px;height:28px;border-radius:50%;background:var(--green);color:#fff;font-size:13px}
+.date-slots{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+.date-slot{border:1px solid #cfdac9;background:#fff;border-radius:10px;padding:10px 3px;text-align:center;color:var(--ink);min-height:76px}
+.date-slot .day{display:block;color:var(--muted);font-size:11px;font-weight:700}
+.date-slot .num{display:block;font-size:20px;font-weight:900;line-height:1.4}
+.date-slot .month{display:block;font-size:10px;color:var(--muted)}
+.date-slot.selected,.time-slot.selected{background:var(--green);border-color:var(--green);color:white}
+.date-slot.selected .day,.date-slot.selected .month{color:#e4eddc}
+.date-slot:disabled{opacity:.4;cursor:not-allowed}
+.time-slots{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.time-slot{border:1px solid #cfdac9;border-radius:10px;background:white;padding:12px 8px;color:var(--green);font-weight:800;text-align:center}
+.time-slot:before{content:'◷ ';font-weight:400}
+.booking-help{font-size:12px;color:var(--muted);margin:10px 0 0}
+.booking-selected{font-size:13px;font-weight:800;color:var(--green);margin-top:12px}
+@media(max-width:560px){.date-slots{grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}.date-slot{min-height:64px;padding:8px 2px}.date-slot .num{font-size:18px}.time-slots{grid-template-columns:1fr}.booking-box{padding:10px}.modal-box{border-radius:16px}.modal{padding:8px}}
+@media(max-width:850px){
+.navlinks{gap:10px;font-size:12px}
+.navlinks a:nth-last-child(n+4){display:none}
+.nav .btn{display:none}
+.hero{height:520px}
+.hero h1{font-size:48px}
+.hero-benefits{display:none}
+.availability,.plan-layout,.about-grid,.plan-cards{grid-template-columns:1fr}
+.why-grid{grid-template-columns:1fr 1fr}
+.summary{position:static}
+}
+@media(max-width:560px){
+.nav{height:65px}
+.brand{font-size:15px}
+.logo{width:37px;height:37px}
+.navlinks{gap:9px}
+.navlinks a{font-size:11px}
+.navlinks a:nth-child(n+3){display:none}
+.hero{height:500px}
+.hero h1{font-size:42px;letter-spacing:-1.8px}
+.hero p{font-size:16px;max-width:90%}
+.hero-content{width:88%}
+.arrows{padding:0 7px}
+.arrows button{width:36px;height:36px}
+.trust .wrap{display:grid;grid-template-columns:1fr 1fr;font-size:12px}
+section{padding:42px 0}
+.section-head{display:block}
+.grid3,.why-grid,.two,.footer-grid{grid-template-columns:1fr}
+.card img{height:210px}
+.availability{padding:20px}
+.panel,.summary{padding:18px}
+}
+</style>
+</head>
+<body>
+<header>
+<div class="wrap nav">
+<a class="brand" href="#home"><span class="logo">☀</span><span>SGS SOLUTIONS<small style="display:block;font-size:10px;font-weight:600;letter-spacing:0">Your solar care experts</small></span></a>
+<nav class="navlinks">
+<a href="#home">Home</a><a href="#services">Features</a><a href="#about">About Us</a><a href="#why">Why Choose Us</a><a href="#availability">Check PIN</a>
+</nav>
+<div class="navright">
+<a class="btn lime" href="/booking.html">Book Appointment</a>
+<div class="menu">
+<button class="menu-btn" id="menuBtn" aria-label="Login menu" aria-expanded="false" onclick="toggleMenu()">☰</button>
+<div class="login-menu" id="loginMenu">
+<button onclick="loginChoice('Customer')">♙ Customer Login</button>
+<button onclick="loginChoice('Partner')">♟ Partner Login</button>
+<button onclick="loginChoice('Admin')">⬟ Admin Login</button>
+</div>
+</div>
+</div>
+</div>
+</header>
+<main>
+<section class="hero" id="home">
+<div class="slides" id="heroSlides">
+<div class="slide active" style="background-image:url('https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=2200&q=90')"></div>
+<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1497440001374-f26997328c1b?auto=format&fit=crop&w=2200&q=90')"></div>
+<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=2200&q=90')"></div>
+<div class="slide" style="background-image:url('https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=2200&q=90')"></div>
+</div>
+<div class="wrap hero-content">
+<span class="free-label">✦ FIRST ON-SITE VISIT FREE</span>
+<h1>Clean Panels.<br>Brighter <span>Tomorrow.</span></h1>
+<p>Professional solar panel cleaning, system inspection and maintenance for better performance and long-term savings.</p>
+<div class="actions"><a class="btn lime" href="/booking.html">Book Free Visit →</a><a class="btn outline" href="#plans">Build Your Plan →</a></div>
+</div>
+<div class="arrows"><button onclick="moveSlide(-1)" aria-label="Previous image">‹</button><button onclick="moveSlide(1)" aria-label="Next image">›</button></div>
+<div class="dots" id="dots"><button class="active" onclick="showSlide(0)" aria-label="Image 1"></button><button onclick="showSlide(1)" aria-label="Image 2"></button><button onclick="showSlide(2)" aria-label="Image 3"></button><button onclick="showSlide(3)" aria-label="Image 4"></button></div>
+</section>
+
+<div class="trust"><div class="wrap"><span>Trained professionals</span><span>Scheduled cleaning</span><span>Routine inspection</span><span>Clear annual plans</span></div></div>
+
+<section id="availability">
+<div class="wrap availability">
+<div><div class="kicker" style="color:#d8ef35">Service area checker</div><h2>Check your location availability.</h2><p>Enter your PIN code to check our Agra-area service estimate. Locations outside our current list can request future coverage.</p></div>
+<div class="white-panel">
+<div class="field"><label for="availPin">Your 6-digit PIN code</label><input id="availPin" inputmode="numeric" maxlength="6" placeholder="e.g. 282001"></div>
+<button class="btn dark" style="width:100%" onclick="checkAvailability()">Check Availability →</button>
+<div class="status" id="availStatus" role="status"></div>
+</div>
+</div>
+</section>
+
+<section id="services">
+<div class="wrap">
+<div class="section-head"><div><div class="kicker">What we do</div><h2>Solar care made simple.</h2></div><p>Plan cleaning and inspections around your system, with a free first visit to discuss your needs.</p></div>
+<div class="grid3">
+<article class="card"><img loading="lazy" src="https://images.unsplash.com/photo-1497440001374-f26997328c1b?auto=format&fit=crop&w=1000&q=85" alt="Solar panels"><div class="card-body"><h3>Panel Cleaning</h3><p>Scheduled cleaning to help remove dust and surface buildup.</p></div></article>
+<article class="card"><img loading="lazy" src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1000&q=85" alt="Rooftop solar panels"><div class="card-body"><h3>System Inspection</h3><p>Routine visual checks and a chance to discuss system concerns.</p></div></article>
+<article class="card"><img loading="lazy" src="https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=1000&q=85" alt="Solar energy installation"><div class="card-body"><h3>Maintenance Support</h3><p>Discuss inverter checks and other maintenance needs with our team.</p></div></article>
+</div>
+</div>
+</section>
+
+<section id="plans">
+<div class="wrap">
+<div class="section-head"><div><div class="kicker">Made for your system</div><h2>Residential &amp; Commercial Plans</h2></div><p>Choose a starting package, then customize your cleaning schedule and inspection frequency below. Prices are reference rates and final quotations are confirmed by our team.</p></div>
+<div class="plan-cards">
+<article class="plan-card"><div class="kicker">For homes</div><h3>Residential Solar Care</h3><p>Designed for rooftop solar systems at houses and small residential properties.</p><div class="plan-price">Starting price ₹2,199/year</div><button class="btn dark" onclick="selectPlan('Residential','3')">Choose Residential</button></article>
+<article class="plan-card"><div class="kicker">For businesses</div><h3>Commercial Solar Care</h3><p>For offices, shops, institutions and commercial solar installations.</p><div class="plan-price">Starting price ₹7,999/year</div><button class="btn dark" onclick="selectPlan('Commercial','30')">Choose Commercial</button></article>
+</div>
+<div class="plan-layout">
+<div class="panel">
+<div class="two">
+<div class="field"><label for="category">Property Category</label><select id="category" onchange="categoryChanged()"><option>Residential</option><option>Commercial</option></select></div>
+<div class="field"><label for="capacity">Solar Capacity</label><select id="capacity" onchange="updateQuote()"></select></div>
+</div>
+<input type="hidden" id="cleaning" value="4">
+<input type="hidden" id="inspection" value="4">
+<h3>Your Details</h3>
+<div class="two">
+<div class="field"><label for="customerName">Full Name</label><input id="customerName" autocomplete="name" placeholder="Your full name"></div>
+<div class="field"><label for="customerPhone">Mobile Number</label><input id="customerPhone" inputmode="numeric" maxlength="10" autocomplete="tel" placeholder="10-digit number"></div>
+<div class="field"><label for="customerPin">PIN Code</label><input id="customerPin" inputmode="numeric" maxlength="6" placeholder="6-digit PIN" oninput="syncPin()"></div>
+<div class="field"><label for="customerAddress">Full Address</label><input id="customerAddress" autocomplete="street-address" placeholder="House, area, city"></div>
+<div class="field" style="grid-column:1/-1"><label>Appointment Date &amp; Time</label>
+<div class="booking-box">
+<div class="booking-step"><span class="step-number">1</span> Select a service date</div>
+<div class="date-slots" id="quoteDateSlots" aria-label="Available appointment dates"></div>
+<input id="appointmentDate" type="hidden" required>
+<div class="booking-step" style="margin-top:18px"><span class="step-number">2</span> Choose a time slot</div>
+<div class="time-slots" id="quoteTimeSlots" aria-label="Appointment time slots"></div>
+<input id="appointmentTime" type="hidden" required>
+<div class="booking-selected" id="quoteAppointmentSummary">Select a date and time to continue.</div>
+<p class="booking-help">Slots are preferred appointment requests, not live confirmed availability. SGS SOLUTIONS will confirm your booking.</p>
+</div>
+</div>
+</div>
+<p class="small">Select your preferred service date and time. The appointment is a request and will be confirmed by the SGS SOLUTIONS team.</p>
+<button class="btn dark" style="width:100%" onclick="submitQuote()">Request My Quotation →</button>
+<div class="status" id="quoteStatus" role="status"></div>
+</div>
+
+<aside class="summary">
+<div class="summary-row"><span>Property</span><strong id="sumCategory">Residential</strong></div>
+<div class="summary-row"><span>Capacity</span><strong id="sumCapacity">Up to 3 kW</strong></div>
+<div class="summary-row"><span>Cleaning</span><strong id="sumCleaning">4 / year</strong></div>
+<div class="summary-row"><span>Inspection</span><strong id="sumInspection">4 / year</strong></div>
+<div class="summary-row"><span>Service area</span><strong id="sumArea">Not checked</strong></div>
+<div class="price" id="sumPrice">₹2,199 / year</div>
+<p class="note" id="sumNote">Reference price for the standard 4 cleanings and 4 inspections per year.</p>
+<div class="free-box"><strong>First on-site visit is FREE</strong><p>Let our team inspect your setup before finalizing your maintenance plan.</p><a class="btn lime" href="/booking.html">Book Free Visit →</a></div>
+</aside>
+</div>
+</div>
+</section>
+
+<section id="about">
+<div class="wrap about-grid">
+<div><div class="kicker">About SGS SOLUTIONS</div><h2>Solar care made simpler.</h2><p>SGS SOLUTIONS helps residential and commercial solar owners plan panel cleaning, system inspections and maintenance in a clear and convenient way.</p><p>Start with a free first on-site visit, share your requirements and request a plan. Our team confirms service coverage, schedule and final quotation before work is booked.</p><a href="#plans" class="btn dark">Explore Plans →</a></div>
+<img loading="lazy" src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?auto=format&fit=crop&w=1200&q=85" alt="Solar panels in sunlight">
+</div>
+</section>
+
+<section id="why" style="background:#edf4e5">
+<div class="wrap"><div class="section-head"><div><div class="kicker">Why choose us</div><h2>Clear service. Confident decisions.</h2></div><p>Know what you are requesting and what needs confirmation before scheduling your solar maintenance.</p></div>
+<div class="why-grid">
+<article class="why-card"><div class="why-icon">☀</div><h3>Free First Visit</h3><p>Discuss your system and requirements before choosing a maintenance plan.</p></article>
+<article class="why-card"><div class="why-icon">✓</div><h3>Trained Professionals</h3><p>Request scheduled cleaning and inspection from a dedicated service team.</p></article>
+<article class="why-card"><div class="why-icon">₹</div><h3>Transparent Pricing</h3><p>See standard plan prices clearly; custom schedules need confirmation.</p></article>
+<article class="why-card"><div class="why-icon">⌖</div><h3>Location Check</h3><p>Check the PIN estimate and let our team confirm exact service availability.</p></article>
+</div>
+</div>
+</section>
+</main>
+
+<footer><div class="wrap footer-grid"><div><div class="brand"><span class="logo">☀</span>SGS SOLUTIONS</div><p>Your solar care experts.</p><p>Clean panels. Better performance.</p></div><div><strong>Quick Links</strong><p><a href="#services">Features</a></p><p><a href="#about">About Us</a></p><p><a href="#why">Why Choose Us</a></p><p><a href="#availability">Check PIN</a></p></div><div><strong>Services</strong><p>Panel Cleaning</p><p>System Inspection</p><p>Maintenance Support</p></div></div></footer>
+
+<div class="modal" id="visitModal" role="dialog" aria-modal="true" aria-labelledby="visitTitle">
+<div class="modal-box"><button class="close" onclick="closeVisit()" aria-label="Close">×</button><div class="kicker">First visit is free</div><h2 id="visitTitle">Book your free on-site visit.</h2><p class="note">Submit your details to request an appointment. The team must confirm the date and coverage.</p>
+<div class="field"><label for="visitName">Full Name</label><input id="visitName" placeholder="Your name"></div>
+<div class="field"><label for="visitPhone">Mobile Number</label><input id="visitPhone" maxlength="10" inputmode="numeric" placeholder="10-digit number"></div>
+<div class="field"><label for="visitPin">PIN Code</label><input id="visitPin" maxlength="6" inputmode="numeric" placeholder="6-digit PIN"></div>
+<div class="field"><label for="visitAddress">Full Address</label><textarea id="visitAddress" rows="2" placeholder="House, area, city"></textarea></div>
+<div class="field"><label>Appointment Date &amp; Time</label>
+<div class="booking-box"><div class="booking-step"><span class="step-number">1</span> Select a visit date</div>
+<div class="date-slots" id="visitDateSlots" aria-label="Available visit dates"></div>
+<input id="visitDate" type="hidden" required>
+<div class="booking-step" style="margin-top:18px"><span class="step-number">2</span> Choose a time slot</div>
+<div class="time-slots" id="visitTimeSlots" aria-label="Visit time slots"></div>
+<input id="visitTime" type="hidden" required>
+<div class="booking-selected" id="visitAppointmentSummary">Select a date and time to continue.</div>
+<p class="booking-help">Your selected slot will be sent to our team for confirmation.</p>
+</div>
+</div>
+<button class="btn dark" style="width:100%" onclick="submitVisit()">Request Free Visit →</button><div class="status" id="visitStatus" role="status"></div>
+</div>
+</div>
+<script>
+const $ = id => document.getElementById(id);
+
+const appointmentTimeOptions = [
+  "09:00 AM – 11:00 AM",
+  "11:00 AM – 01:00 PM",
+  "01:00 PM – 03:00 PM",
+  "03:00 PM – 05:00 PM",
+  "05:00 PM – 07:00 PM"
+];
+
+function localISODate(date) {
+  const d = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+  return d.toISOString().slice(0, 10);
+}
+
+function formatDateLabel(iso) {
+  const d = new Date(iso + "T12:00:00");
+  return d.toLocaleDateString("en-IN", {
+    weekday: "long",
+    day: "numeric",
+    month: "long"
+  });
+}
+
+function updateAppointmentSummary(prefix) {
+  const date = $(prefix + "Date").value;
+  const time = $(prefix + "Time").value;
+  const summary = $(prefix + "AppointmentSummary");
+
+  if (summary) {
+    summary.textContent = date && time
+      ? "Selected: " + formatDateLabel(date) + " · " + time
+      : (date
+          ? "Date selected — now choose a time slot."
+          : "Select a date and time to continue.");
+  }
+}
+
+function renderAppointmentPicker(prefix) {
+  const dateWrap = $(prefix + "DateSlots");
+  const timeWrap = $(prefix + "TimeSlots");
+
+  if (!dateWrap || !timeWrap) return;
+
+  dateWrap.innerHTML = "";
+  timeWrap.innerHTML = "";
+
+  const today = new Date();
+  today.setHours(0, 0, 0, 0);
+
+  for (let i = 0; i < 14; i++) {
+    const d = new Date(today);
+    d.setDate(today.getDate() + i);
+
+    const iso = localISODate(d);
+    const b = document.createElement("button");
+
+    b.type = "button";
+    b.className = "date-slot";
+    b.innerHTML =
+      '<span class="day">' +
+      (i === 0 ? "TODAY" : d.toLocaleDateString("en-IN", {
+        weekday: "short"
+      }).toUpperCase()) +
+      '</span><span class="num">' + d.getDate() +
+      '</span><span class="month">' +
+      d.toLocaleDateString("en-IN", { month: "short" }) +
+      '</span>';
+
+    b.setAttribute("aria-label", formatDateLabel(iso));
+
+    b.addEventListener("click", () => {
+      dateWrap.querySelectorAll(".date-slot").forEach(x =>
+        x.classList.remove("selected")
+      );
+
+      b.classList.add("selected");
+      $(prefix + "Date").value = iso;
+      updateAppointmentSummary(prefix);
+    });
+
+    dateWrap.appendChild(b);
+  }
+
+  appointmentTimeOptions.forEach(slot => {
+    const b = document.createElement("button");
+
+    b.type = "button";
+    b.className = "time-slot";
+    b.textContent = slot;
+
+    b.addEventListener("click", () => {
+      timeWrap.querySelectorAll(".time-slot").forEach(x =>
+        x.classList.remove("selected")
+      );
+
+      b.classList.add("selected");
+      $(prefix + "Time").value = slot;
+      updateAppointmentSummary(prefix);
+    });
+
+    timeWrap.appendChild(b);
+  });
+}
+
+function toggleMenu() {
+  const menu = $("loginMenu");
+  const button = $("menuBtn");
+
+  const isOpen = !menu.classList.contains("open");
+
+  menu.classList.toggle("open", isOpen);
+  button.setAttribute("aria-expanded", String(isOpen));
+}
+
+document.addEventListener("click", function(event) {
+  if (!event.target.closest(".menu")) {
+    $("loginMenu").classList.remove("open");
+    $("menuBtn").setAttribute("aria-expanded", "false");
+  }
+});
+
+/* FIXED LOGIN MENU */
+function loginChoice(role) {
+  $("loginMenu").classList.remove("open");
+  $("menuBtn").setAttribute("aria-expanded", "false");
+
+  if (role === "Admin") {
+    window.location.href = "/admin.html";
+  } else if (role === "Customer") {
+    window.location.href = "/customer-login.html";
+  } else if (role === "Partner") {
+    window.location.href = "/partner-login.html";
+  } else {
+    alert("Unknown login role: " + role);
+  }
+}
+
+let slideIndex = 0;
+let slideTimer;
+
+function showSlide(n) {
+  const slides = [...document.querySelectorAll(".slide")];
+  const dots = [...document.querySelectorAll(".dots button")];
+
+  slideIndex = (n + slides.length) % slides.length;
+
+  slides.forEach((s, i) =>
+    s.classList.toggle("active", i === slideIndex)
+  );
+
+  dots.forEach((d, i) =>
+    d.classList.toggle("active", i === slideIndex)
+  );
+}
+
+function moveSlide(n) {
+  showSlide(slideIndex + n);
+  restartSlides();
+}
+
+function restartSlides() {
+  clearInterval(slideTimer);
+  slideTimer = setInterval(() => showSlide(slideIndex + 1), 5000);
+}
+
+restartSlides();
+
+$("heroSlides").addEventListener("mouseenter", () =>
+  clearInterval(slideTimer)
+);
+
+$("heroSlides").addEventListener("mouseleave", restartSlides);
+
+const prices = {
+  Residential: { "3": 2199, "5": 2999, "10": 5499 },
+  Commercial: { "30": 7999, "50": 9999 }
+};
+
+const capacityLabels = {
+  Residential: {
+    "3": "Up to 3 kW",
+    "5": "3.5–5 kW",
+    "10": "5.5–10 kW"
+  },
+  Commercial: {
+    "30": "Up to 30 kW",
+    "50": "30.5–50 kW",
+    "custom": "Above 50 kW"
+  }
+};
+
+let pinStatus = "Not checked";
+
+function isAgraPin(pin) {
+  return /^282\d{3}$/.test(pin) || /^283\d{3}$/.test(pin);
+}
+
+function checkAvailability() {
+  const pin = $("availPin").value.trim();
+  const s = $("availStatus");
+
+  if (!/^\d{6}$/.test(pin)) {
+    s.className = "status bad";
+    s.textContent = "Please enter a valid 6-digit PIN code.";
+    return;
+  }
+
+  if (isAgraPin(pin)) {
+    pinStatus = "Agra-area estimate";
+    s.className = "status good";
+    s.textContent =
+      "This PIN is within our current Agra-area estimate. Exact coverage will be confirmed by the team.";
+  } else {
+    pinStatus = "Coming soon";
+    s.className = "status bad";
+    s.textContent =
+      "We are not currently listing this PIN as covered. Submit a request to ask about future service.";
+  }
+
+  $("customerPin").value = pin;
+  $("visitPin").value = pin;
+  updateQuote();
+}
+
+function syncPin() {
+  $("availPin").value = $("customerPin").value;
+  pinStatus = "Not checked";
+  updateQuote();
+}
+
+function categoryChanged() {
+  const c = $("category").value;
+  const cap = $("capacity");
+
+  cap.innerHTML = "";
+
+  const options = c === "Residential"
+    ? [
+        ["3", "Up to 3 kW"],
+        ["5", "3.5–5 kW"],
+        ["10", "5.5–10 kW"]
+      ]
+    : [
+        ["30", "Up to 30 kW"],
+        ["50", "30.5–50 kW"],
+        ["custom", "Above 50 kW — custom quote"]
+      ];
+
+  options.forEach(([v, t]) => {
+    const o = document.createElement("option");
+    o.value = v;
+    o.textContent = t;
+    cap.appendChild(o);
+  });
+
+  updateQuote();
+}
+
+function selectPlan(category, capacity) {
+  $("category").value = category;
+  categoryChanged();
+  $("capacity").value = capacity;
+  updateQuote();
+
+  $("plans").scrollIntoView({
+    behavior: "smooth",
+    block: "start"
+  });
+}
+
+function updateQuote() {
+  const c = $("category").value;
+  const cap = $("capacity").value;
+  const clean = $("cleaning").value;
+  const inspect = $("inspection").value;
+  const p = prices[c][cap];
+
+  const custom =
+    clean === "custom" ||
+    inspect === "custom" ||
+    cap === "custom";
+
+  $("sumCategory").textContent = c;
+  $("sumCapacity").textContent = capacityLabels[c][cap];
+  $("sumCleaning").textContent =
+    clean === "custom" ? "To discuss" : clean + " / year";
+  $("sumInspection").textContent =
+    inspect === "custom" ? "To discuss" : inspect + " / year";
+  $("sumArea").textContent = pinStatus;
+
+  if (p && clean === "4" && inspect === "4" && !custom) {
+    $("sumPrice").textContent = "₹" + p.toLocaleString("en-IN") + " / year";
+    $("sumNote").textContent =
+      "Reference price for the standard 4-cleaning + 4-inspection package. Final quote requires confirmation.";
+  } else {
+    $("sumPrice").textContent = "Price to be confirmed";
+    $("sumNote").textContent =
+      "Your selected schedule requires a separately confirmed quotation.";
+  }
+}
+
+function saveDemoRequest(type, data) {
+  try {
+    const key = "sgsDemoRequests";
+    const arr = JSON.parse(localStorage.getItem(key) || "[]");
+
+    arr.push({
+      type,
+      createdAt: new Date().toISOString(),
+      ...data
+    });
+
+    localStorage.setItem(key, JSON.stringify(arr));
+    return true;
+  } catch (e) {
+    return false;
+  }
+}
+
+async function submitQuote() {
+  const name = $("customerName").value.trim();
+  const phone = $("customerPhone").value.trim();
+  const pin = $("customerPin").value.trim();
+  const address = $("customerAddress").value.trim();
+  const appointmentDate = $("appointmentDate").value;
+  const appointmentTime = $("appointmentTime").value;
+  const category = $("category").value;
+  const capacity = $("capacity");
+  const cleaning = $("cleaning").value;
+  const inspection = $("inspection").value;
+  const status = $("quoteStatus");
+
+  if (
+    !name ||
+    !/^\d{10}$/.test(phone) ||
+    !/^\d{6}$/.test(pin) ||
+    !address ||
+    !appointmentDate ||
+    !appointmentTime
+  ) {
+    status.className = "status bad";
+    status.textContent = "Please enter valid details in all fields.";
+    return;
+  }
+
+  const requirement = [
+    "Quotation request",
+    "Category: " + category,
+    "Capacity: " + capacity.options[capacity.selectedIndex].text,
+    "Cleaning per year: " + cleaning,
+    "Inspection per year: " + inspection,
+    "PIN: " + pin,
+    "Address: " + address,
+    "Preferred service date: " + appointmentDate,
+    "Preferred time slot: " + appointmentTime
+  ].join("\n");
+
+  status.textContent = "Submitting your request...";
+
+  try {
+    const response = await fetch("/api/enquiries", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, phone, requirement })
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.error || "Request failed.");
+    }
+
+    status.className = "status good";
+    status.textContent = "Request submitted successfully!";
+  } catch (error) {
+    status.className = "status bad";
+    status.textContent = error.message || "Server connection failed.";
+  }
+}
+
+function openVisit() {
+  window.location.href = "/booking.html";
+}
+
+function closeVisit() {
+  $("visitModal").classList.remove("open");
+  document.body.style.overflow = "";
+}
+
+async function submitVisit() {
+  const name = $("visitName").value.trim();
+  const phone = $("visitPhone").value.trim();
+  const pin = $("visitPin").value.trim();
+  const address = $("visitAddress").value.trim();
+  const date = $("visitDate").value;
+  const time = $("visitTime").value;
+  const s = $("visitStatus");
+
+  if (
+    !name ||
+    !/^[0-9]{10}$/.test(phone) ||
+    !/^[0-9]{6}$/.test(pin) ||
+    !address ||
+    !date ||
+    !time
+  ) {
+    s.className = "status bad";
+    s.textContent =
+      "Enter valid details and select a preferred date and time.";
+    return;
+  }
+
+  const requirement = [
+    "FREE ON-SITE VISIT REQUEST",
+    "PIN: " + pin,
+    "Address: " + address,
+    "Preferred visit date: " + date,
+    "Preferred time slot: " + time,
+    "Coverage: " + (isAgraPin(pin)
+      ? "Agra-area estimate"
+      : "Outside listed coverage")
+  ].join("\n");
+
+  s.className = "status";
+  s.textContent = "Submitting your visit request...";
+
+  try {
+    const response = await fetch("/api/enquiries", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, phone, requirement })
+    });
+
+    const result = await response.json();
+
+    if (!response.ok) {
+      throw new Error(result.error || result.message || "Request failed.");
+    }
+
+    s.className = "status good";
+    s.textContent =
+      "Free visit request submitted! Our team will confirm your appointment.";
+  } catch (error) {
+    console.error("Free visit error:", error);
+    s.className = "status bad";
+    s.textContent = error.message || "Server connection failed.";
+  }
+}
+
+$("visitModal").addEventListener("click", e => {
+  if (e.target === $("visitModal")) closeVisit();
+});
+
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape") closeVisit();
+});
+
+categoryChanged();
+renderAppointmentPicker("quote");
+renderAppointmentPicker("visit");
+</script>
+
+<!-- Account portals -->
+<div class="account-portal-links" style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;padding:18px 12px">
+<a href="/customer-login.html">Customer Login / Create Account</a>
+<a href="/partner-login.html">Partner Login / Create Account</a>
+<a href="/admin.html">Admin Portal</a>
+</div>
+</body>
+</html>

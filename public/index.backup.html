@@ -1,0 +1,2416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SGS SOLUTION | Solar Made Simple</title>
+<meta name="description" content="Solar installation, maintenance and customer care plans by SGS SOLUTION.">
+<meta name="theme-color" content="#183b25">
+
+<style>
+:root {
+  --ink: #173a24;
+  --muted: #526653;
+  --green: #26743b;
+  --lime: #ffdf3f;
+  --cream: #f2f8e8;
+  --white: #f7fbe9;
+  --line: #d3e3c4;
+  --orange: #ffb34d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  color: var(--ink);
+  background: var(--cream);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+.topbar {
+  background: #183b25;
+  color: #f8fbe9;
+  font-size: 12px;
+  padding: 9px 5vw;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.topbar span {
+  opacity: .9;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(246, 247, 239, .95);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid #d8e8c7;
+}
+
+.nav {
+  max-width: 1200px;
+  margin: auto;
+  padding: 14px 22px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-weight: 900;
+  letter-spacing: -.5px;
+  font-size: 17px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.logo {
+  width: 36px;
+  height: 36px;
+  background: var(--lime);
+  border-radius: 11px;
+  display: grid;
+  place-items: center;
+  color: #123a27;
+  font-size: 21px;
+  box-shadow: inset 0 0 0 1px #e9a91c;
+  flex-shrink: 0;
+}
+
+.brand small {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 2px;
+  color: var(--green);
+  margin-top: 2px;
+}
+
+.navlinks {
+  display: flex;
+  gap: clamp(10px, 1.55vw, 20px);
+  margin-left: auto;
+  font-size: 12px;
+  font-weight: 700;
+  color: #35513a;
+  white-space: nowrap;
+}
+
+.navlinks a:hover {
+  color: var(--green);
+}
+
+.navactions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+}
+
+.navactions .btn {
+  padding: 10px 13px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.btn {
+  border: 0;
+  border-radius: 999px;
+  padding: 12px 18px;
+  font-weight: 750;
+  font-size: 13px;
+  transition: transform .2s ease, box-shadow .2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px #214b2d18;
+}
+
+.btn-dark {
+  background: var(--lime);
+  color: #183b25;
+}
+
+.btn-lime {
+  background: var(--lime);
+  color: #183d29;
+}
+
+.btn-outline {
+  border: 1px solid #b9d3a6;
+  background: transparent;
+  color: var(--ink);
+}
+
+.menu-wrap {
+  position: relative;
+}
+
+.menu-btn {
+  border: 1px solid var(--line);
+  background: var(--white);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 21px;
+  line-height: 1;
+  padding: 0;
+  display: grid;
+  place-items: center;
+}
+
+.dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: 43px;
+  width: 190px;
+  max-width: calc(100vw - 28px);
+  padding: 6px;
+  background: #fbfde9;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  box-shadow: 0 16px 35px #12251d24;
+  z-index: 40;
+}
+
+.dropdown.open {
+  display: block;
+}
+
+.dropdown button {
+  display: block;
+  width: 100%;
+  border: 0;
+  background: #fbfde9;
+  color: #23482c;
+  text-align: left;
+  padding: 10px 11px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.dropdown button:hover {
+  background: #eaf4d8;
+}
+
+.hero {
+  max-width: 1200px;
+  margin: auto;
+  padding: 56px 24px 45px;
+  display: grid;
+  grid-template-columns: 1.02fr .98fr;
+  gap: 45px;
+  align-items: center;
+  min-height: 550px;
+  overflow: hidden;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid #f0dfb5;
+  background: #fbfde9;
+  padding: 8px 12px;
+  border-radius: 999px;
+  color: #28683a;
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #d99b19;
+  box-shadow: 0 0 0 4px #d99b1922;
+}
+
+.hero h1 {
+  font-size: clamp(42px, 5.2vw, 68px);
+  line-height: .99;
+  letter-spacing: -3px;
+  margin: 22px 0 19px;
+  max-width: 600px;
+}
+
+.hero h1 em {
+  font-style: normal;
+  color: var(--green);
+}
+
+.hero p {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.75;
+  max-width: 510px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 26px 0 28px;
+}
+
+.trustline {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  font-size: 12px;
+  color: #526653;
+}
+
+.avatars {
+  display: flex;
+}
+
+.avatars span {
+  width: 28px;
+  height: 28px;
+  border: 2px solid var(--cream);
+  border-radius: 50%;
+  background: #f5d77e;
+  display: grid;
+  place-items: center;
+  margin-left: -6px;
+  font-size: 12px;
+}
+
+.avatars span:first-child {
+  margin: 0;
+}
+
+.trustline b {
+  color: var(--ink);
+}
+
+.visual {
+  height: 430px;
+  position: relative;
+  border-radius: 32px;
+  overflow: hidden;
+  background: linear-gradient(140deg, #fbe5a1, #9bb8ee 45%, #87b95a);
+  box-shadow: 0 30px 70px #164a3024;
+  isolation: isolate;
+  animation: visualIn 1s ease both;
+}
+
+.visual:before {
+  content: "";
+  position: absolute;
+  width: 290px;
+  height: 290px;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff5c7, #ffc247 65%, transparent 70%);
+  right: 35px;
+  top: 20px;
+  animation: sunpulse 5s ease-in-out infinite;
+}
+
+.sun {
+  position: absolute;
+  right: 104px;
+  top: 76px;
+  width: 135px;
+  height: 135px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #fff5c7, #ffc247);
+  box-shadow: 0 0 60px #ffda7d90;
+  animation: sunGlow 5s ease-in-out infinite;
+}
+
+.hills {
+  position: absolute;
+  bottom: -20px;
+  width: 120%;
+  height: 180px;
+  left: -10%;
+  background: #4b8d42;
+  border-radius: 50% 50% 0 0;
+  transform: rotate(-7deg);
+}
+
+.hills.two {
+  height: 130px;
+  bottom: -25px;
+  background: #2d6639;
+  transform: rotate(7deg);
+  left: -4%;
+  width: 115%;
+}
+
+.house {
+  position: absolute;
+  bottom: 84px;
+  left: 22%;
+  width: 205px;
+  height: 128px;
+  background: #f7f5e8;
+  border-radius: 6px 6px 0 0;
+  box-shadow: 12px 13px 0 #1d5436;
+}
+
+.roof {
+  position: absolute;
+  bottom: 205px;
+  left: 18%;
+  width: 225px;
+  height: 100px;
+  background: #244d2e;
+  clip-path: polygon(50% 0, 100% 100%, 0 100%);
+}
+
+.roofpanel {
+  position: absolute;
+  bottom: 216px;
+  left: 28%;
+  width: 126px;
+  height: 65px;
+  transform: skew(-22deg) rotate(-8deg);
+  background: repeating-linear-gradient(
+    90deg,
+    #285b35 0 29px,
+    #7aa8d8 30px 32px
+  );
+  border: 3px solid #d1edf1;
+  box-shadow: 0 4px 0 #214b2d;
+}
+
+.window {
+  position: absolute;
+  bottom: 119px;
+  left: 34%;
+  width: 38px;
+  height: 42px;
+  background: #8ac6d6;
+  border: 5px solid #f7f5e8;
+}
+
+.door {
+  position: absolute;
+  bottom: 84px;
+  left: 51%;
+  height: 65px;
+  width: 37px;
+  background: #8eac80;
+  border-radius: 4px 4px 0 0;
+}
+
+.leaf {
+  position: absolute;
+  bottom: 80px;
+  right: 13%;
+  height: 145px;
+  width: 12px;
+  background: #2d6639;
+  border-radius: 10px;
+  transform: rotate(15deg);
+}
+
+.leaf:before,
+.leaf:after {
+  content: "";
+  position: absolute;
+  width: 58px;
+  height: 24px;
+  background: #3b7840;
+  border-radius: 100% 0 100% 0;
+  left: -48px;
+  top: 25px;
+  transform: rotate(-35deg);
+}
+
+.leaf:after {
+  top: 68px;
+  left: 2px;
+  transform: rotate(25deg);
+}
+
+.float-card {
+  position: absolute;
+  z-index: 5;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  padding: 15px 17px;
+  box-shadow: 0 14px 35px #143e2a22;
+}
+
+.saving {
+  top: 34px;
+  left: 24px;
+}
+
+.saving small,
+.stat-card small {
+  display: block;
+  color: #526653;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.saving strong {
+  font-size: 25px;
+  display: block;
+  margin: 4px 0;
+}
+
+.saving span {
+  font-size: 11px;
+  color: #b77b0d;
+}
+
+.stat-card {
+  right: 20px;
+  bottom: 30px;
+}
+
+.stat-card strong {
+  font-size: 23px;
+  display: block;
+  margin-top: 5px;
+}
+
+.spark {
+  position: absolute;
+  right: 22px;
+  top: 22px;
+  color: #ffca62;
+  font-size: 30px;
+  animation: float 4s ease-in-out infinite;
+}
+
+.ray {
+  position: absolute;
+  color: #fff5c7;
+  z-index: 2;
+  animation: float 5s ease-in-out infinite;
+}
+
+.ray-one {
+  top: 155px;
+  right: 43%;
+  font-size: 25px;
+}
+
+.ray-two {
+  top: 65px;
+  left: 47%;
+  font-size: 16px;
+  animation-delay: 1.4s;
+}
+
+.strip {
+  background: var(--white);
+  border-block: 1px solid var(--line);
+  padding: 20px 24px;
+}
+
+.strip-inner {
+  max-width: 1150px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+}
+
+.strip-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 5px 10px;
+}
+
+.strip-icon {
+  height: 40px;
+  width: 40px;
+  border-radius: 13px;
+  background: #eaf4d8;
+  display: grid;
+  place-items: center;
+  font-size: 19px;
+}
+
+.strip-item b {
+  display: block;
+  font-size: 13px;
+}
+
+.strip-item small {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+section.content {
+  max-width: 1200px;
+  margin: auto;
+  padding: 86px 24px;
+}
+
+.section-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 25px;
+  align-items: end;
+  margin-bottom: 32px;
+}
+
+.kicker {
+  color: var(--green);
+  font-weight: 850;
+  text-transform: uppercase;
+  letter-spacing: 1.7px;
+  font-size: 10px;
+}
+
+.section-head h2 {
+  font-size: clamp(30px, 4vw, 45px);
+  line-height: 1.08;
+  letter-spacing: -1.5px;
+  margin: 12px 0 0;
+  max-width: 580px;
+}
+
+.section-head p {
+  max-width: 380px;
+  color: var(--muted);
+  line-height: 1.7;
+  font-size: 13px;
+}
+
+.services {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 17px;
+}
+
+.service {
+  background: var(--white);
+  border: 1px solid var(--line);
+  padding: 25px;
+  border-radius: 22px;
+  min-height: 225px;
+  transition: .25s;
+  position: relative;
+  overflow: hidden;
+}
+
+.service:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 18px 35px #163e2510;
+}
+
+.service-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 16px;
+  background: #eaf4d8;
+  display: grid;
+  place-items: center;
+  font-size: 23px;
+  margin-bottom: 20px;
+  transition: transform .3s;
+}
+
+.service:hover .service-icon {
+  transform: rotate(-7deg) scale(1.08);
+}
+
+.service h3 {
+  margin: 0 0 9px;
+  font-size: 18px;
+}
+
+.service p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.service a {
+  display: inline-block;
+  margin-top: 18px;
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.plans-section {
+  background: #eaf3df;
+  border-block: 1px solid var(--line);
+}
+
+.plans-inner {
+  max-width: 1200px;
+  margin: auto;
+  padding: 80px 24px;
+}
+
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 17px;
+  margin-top: 30px;
+}
+
+.plan {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: 26px;
+  position: relative;
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+
+.plan:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 45px #214b2d16;
+}
+
+.plan.featured {
+  background: #e7f3ce;
+  border-color: #b7d78c;
+  box-shadow: 0 18px 40px #214b2d20;
+}
+
+.plan .pill {
+  display: inline-block;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 850;
+  background: #edf5df;
+  color: #28683a;
+  padding: 7px 10px;
+  border-radius: 99px;
+}
+
+.plan h3 {
+  font-size: 20px;
+  margin: 17px 0 8px;
+}
+
+.plan .desc {
+  font-size: 12px;
+  color: var(--muted);
+  min-height: 36px;
+}
+
+.price {
+  font-size: 37px;
+  font-weight: 900;
+  letter-spacing: -2px;
+  margin: 19px 0 3px;
+  color: var(--green);
+}
+
+.price small {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0;
+  color: var(--muted);
+}
+
+.plan ul {
+  list-style: none;
+  padding: 12px 0 15px;
+  margin: 0;
+}
+
+.plan li {
+  font-size: 12px;
+  color: #526653;
+  padding: 9px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.plan li:before {
+  content: "✓";
+  color: #d58b12;
+  font-weight: 900;
+  margin-right: 9px;
+}
+
+.plan .btn {
+  width: 100%;
+  margin-top: 5px;
+}
+
+.capacity {
+  margin-top: 18px;
+  padding: 20px 24px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.capacity h3 {
+  margin: 0 0 6px;
+  font-size: 16px;
+}
+
+.capacity p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.process {
+  display: grid;
+  grid-template-columns: .85fr 1.15fr;
+  gap: 45px;
+  align-items: center;
+}
+
+.process-panel {
+  background: #214b2d;
+  color: white;
+  border-radius: 28px;
+  padding: 32px;
+  min-height: 340px;
+  position: relative;
+  overflow: hidden;
+}
+
+.process-panel h3 {
+  font-size: 27px;
+  max-width: 330px;
+}
+
+.process-panel p {
+  color: #d8e7d8;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+.process-list {
+  display: grid;
+  gap: 23px;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 16px;
+}
+
+.step-no {
+  height: 45px;
+  width: 45px;
+  border-radius: 15px;
+  background: #eaf4d8;
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+}
+
+.step h4 {
+  margin: 2px 0 7px;
+  font-size: 15px;
+}
+
+.step p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.7;
+}
+
+.cta {
+  max-width: 1152px;
+  margin: 0 auto 80px;
+  padding: 38px 42px;
+  border-radius: 28px;
+  background: var(--lime);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 25px;
+}
+
+.cta h2 {
+  font-size: clamp(27px, 4vw, 39px);
+  margin: 0 0 10px;
+  max-width: 600px;
+}
+
+.cta p {
+  margin: 0;
+  color: #28683a;
+  font-size: 13px;
+}
+
+.cta .btn {
+  background: #214b2d;
+  color: white;
+}
+
+footer {
+  background: #183b25;
+  color: var(--white);
+  padding: 48px 24px 22px;
+}
+
+.footer-inner {
+  max-width: 1150px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  gap: 30px;
+}
+
+.footer-brand p {
+  max-width: 300px;
+  color: #d8e7d8;
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+.footer-col h4 {
+  font-size: 12px;
+  margin: 5px 0 16px;
+}
+
+.footer-col a {
+  display: block;
+  color: #d8e7d8;
+  font-size: 12px;
+  margin: 12px 0;
+}
+
+.footer-bottom {
+  max-width: 1150px;
+  margin: 35px auto 0;
+  border-top: 1px solid #ffffff22;
+  padding-top: 18px;
+  color: #d8e7d8;
+  font-size: 10px;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.modal-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: #0b2119a8;
+  display: none;
+  place-items: center;
+  padding: 20px;
+}
+
+.modal-bg.show {
+  display: grid;
+}
+
+.modal {
+  background: var(--white);
+  border-radius: 25px;
+  width: min(440px, 100%);
+  padding: 28px;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  right: 18px;
+  top: 15px;
+  border: 0;
+  background: #eaf4d8;
+  border-radius: 50%;
+  width: 34px;
+  height: 34px;
+  font-size: 19px;
+}
+
+.field {
+  display: block;
+  margin: 14px 0;
+}
+
+.field span {
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  margin-bottom: 7px;
+}
+
+.field input,
+.field select {
+  width: 100%;
+  border: 1px solid #c7dcb4;
+  border-radius: 12px;
+  padding: 13px;
+  background: #fbfde9;
+  color: #173a24;
+}
+
+.modal .btn {
+  width: 100%;
+  margin-top: 8px;
+}
+
+.notice {
+  font-size: 11px !important;
+  background: #eaf4d8;
+  padding: 11px;
+  border-radius: 10px;
+  color: #526653 !important;
+}
+
+.solar-image-band {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 26px;
+}
+
+.solar-photo {
+  position: relative;
+  min-height: 245px;
+  border-radius: 23px;
+  overflow: hidden;
+  background: #d9e6f5;
+}
+
+.solar-photo img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  object-fit: cover;
+}
+
+.photo-copy {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: 20px;
+  color: white;
+}
+
+@keyframes sunpulse {
+  0%, 100% { transform: scale(1); opacity: .9; }
+  50% { transform: scale(1.08); opacity: 1; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes riseIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes visualIn {
+  from { opacity: 0; transform: translateY(18px) scale(.98); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes sunGlow {
+  0%, 100% { filter: drop-shadow(0 0 0 #ffdf3f00); transform: scale(1); }
+  50% { filter: drop-shadow(0 0 24px #ffdf3fa0); transform: scale(1.035); }
+}
+
+@media (max-width: 900px) {
+  .navlinks { display: none; }
+  .hero, .process { grid-template-columns: 1fr; }
+  .services, .plans-grid { grid-template-columns: 1fr 1fr; }
+  .strip-inner { grid-template-columns: 1fr 1fr; }
+  .footer-inner { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 620px) {
+  .hero { padding: 35px 18px; }
+  .visual { height: 330px; }
+  .services, .plans-grid, .solar-image-band { grid-template-columns: 1fr; }
+  .section-head { display: block; }
+  .cta { margin: 20px; flex-direction: column; align-items: flex-start; }
+  .footer-brand { grid-column: 1 / -1; }
+  .footer-bottom { flex-direction: column; }
+  .content, .plans-inner { padding: 60px 18px !important; }
+  .navactions .register { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+  }
+}
+</style>
+
+<style>
+.portal-overlay{position:fixed;inset:0;z-index:70;background:#f2f8e8;display:none;overflow:auto;color:#183b25}
+.portal-overlay.open{display:block}
+.portal-top{position:sticky;top:0;z-index:5;background:#183b25;color:#f8fbe9;padding:13px clamp(14px,4vw,40px);display:flex;align-items:center;justify-content:space-between;gap:14px}
+.portal-brand{display:flex;align-items:center;gap:10px;font-weight:900}
+.portal-top-actions{display:flex;gap:8px;align-items:center}
+.portal-body{max-width:1180px;margin:auto;padding:28px clamp(14px,4vw,28px) 55px}
+.portal-welcome{display:flex;justify-content:space-between;align-items:flex-start;gap:18px;flex-wrap:wrap;margin-bottom:24px}
+.portal-welcome h1{font-size:clamp(25px,4vw,36px);margin:5px 0}
+.portal-welcome p,.portal-panel p,.portal-row small,.portal-stat span{color:#526653}
+.portal-tag{font-size:10px;font-weight:900;letter-spacing:1.4px;color:#28743a;text-transform:uppercase}
+.portal-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px;margin:20px 0}
+.portal-stat,.portal-panel{background:#fbfde9;border:1px solid #d3e3c4;border-radius:18px;padding:18px;min-width:0}
+.portal-stat span{display:block;font-size:11px}
+.portal-stat strong{display:block;font-size:27px;margin:7px 0}
+.portal-stat small{color:#28743a;font-size:10px}
+.portal-panel{margin-top:16px}
+.portal-panel h3{margin:0 0 8px;font-size:17px}
+.portal-panel p{font-size:12px;line-height:1.65}
+.portal-cols{display:grid;grid-template-columns:1.15fr .85fr;gap:16px}
+.portal-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:14px}
+.portal-action{border:1px solid #cfe1bd;background:#edf5df;color:#183b25;border-radius:12px;padding:12px 13px;font-size:12px;font-weight:800;display:inline-flex;align-items:center;gap:7px;cursor:pointer}
+.portal-action.primary{background:#ffdf3f;border-color:#ffdf3f}
+.portal-action.dark{background:#26743b;border-color:#26743b;color:white}
+.portal-list{display:grid;gap:9px;margin-top:14px}
+.portal-row{border:1px solid #e0ebd5;border-radius:13px;padding:12px;display:flex;align-items:flex-start;justify-content:space-between;gap:12px;font-size:12px;background:#fdfeF4}
+.portal-row b{display:block;margin-bottom:4px}
+.portal-row small{line-height:1.5}
+.portal-status{display:inline-flex;align-items:center;white-space:nowrap;border-radius:99px;background:#fff8c9;color:#5b7116;font-size:10px;font-weight:900;padding:6px 8px}
+.portal-status.ok{background:#e1f3c7;color:#226b35}
+.portal-field{display:block;margin:12px 0}
+.portal-field span{display:block;font-size:11px;font-weight:800;margin-bottom:6px}
+.portal-field input,.portal-field select,.portal-field textarea{width:100%;padding:12px;border:1px solid #d4e5c8;border-radius:11px;background:#fbfdea;font:inherit;font-size:12px;color:#183b25}
+.portal-field textarea{min-height:75px;resize:vertical}
+.portal-note{background:#fff8c9;border:1px solid #e8d96f;border-radius:12px;padding:12px;color:#4e5c24;font-size:11px;line-height:1.6;margin-top:12px}
+.portal-photo{display:block;width:100%;max-height:240px;object-fit:cover;border-radius:12px;margin-top:12px}
+.portal-empty{color:#526653;background:#f1f7e7;border:1px dashed #cfe1bd;border-radius:12px;padding:18px;text-align:center;font-size:12px}
+.photo-copy h3{font-size:22px;margin:8px 0 5px}
+.photo-copy p{font-size:12px;color:white;line-height:1.6}
+@media(max-width:820px){.portal-grid{grid-template-columns:repeat(2,1fr)}.portal-cols{grid-template-columns:1fr}}
+@media(max-width:520px){.portal-top{align-items:flex-start}.portal-top-actions{flex-wrap:wrap;justify-content:flex-end}.portal-stat{padding:14px}.portal-stat strong{font-size:23px}.portal-panel{padding:15px}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span>☀ Solar care made simple — from installation to everyday support</span>
+  <span>Customer support • Online & offline service</span>
+</div>
+
+<header>
+<nav class="nav">
+  <a href="#" class="brand">
+    <span class="logo">☼</span>
+    <span>SGS SOLUTION<small>POWERING A BRIGHTER TOMORROW</small></span>
+  </a>
+
+  <div class="navlinks">
+    <a href="#services">Solar services</a>
+    <a href="#plans">Care plans</a>
+    <a href="#how">How it works</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <div class="navactions">
+    <button class="btn btn-outline" onclick="openModal('login')">Customer login</button>
+    <button class="btn btn-lime register" onclick="openModal('register')">Get started ↗</button>
+
+    <div class="menu-wrap">
+      <button class="menu-btn" aria-label="More options" onclick="toggleMenu()">⋯</button>
+      <div class="dropdown" id="dropdown">
+        <button onclick="openModal('partner')">♧ Partner / Employee login</button>
+        <button onclick="openModal('admin')">⌘ Admin login</button>
+        <button onclick="openModal('login')">♙ Customer login</button>
+      </div>
+    </div>
+  </div>
+</nav>
+</header>
+
+<main>
+<section class="hero">
+  <div class="hero-copy">
+    <div class="eyebrow"><span class="dot"></span> Your solar journey, simplified</div>
+    <h1>Make every ray<br>of sunshine <em>count.</em></h1>
+    <p>Reliable solar solutions, planned maintenance and support that keeps your system shining. One trusted place for your solar needs.</p>
+
+    <div class="hero-buttons">
+      <a class="btn btn-dark" href="#plans">Explore care plans ↗</a>
+      <a class="btn btn-outline" href="#services">Explore solar services</a>
+    </div>
+
+    <div class="trustline">
+      <div class="avatars"><span>☀</span><span>✓</span><span>✦</span></div>
+      <span><b>Solar made easier.</b> Service you can keep track of.</span>
+    </div>
+  </div>
+
+  <div class="visual" aria-label="Solar powered home illustration">
+    <div class="sun"></div>
+    <span class="spark">✦</span>
+    <span class="ray ray-one">✧</span>
+    <span class="ray ray-two">✦</span>
+    <div class="float-card saving">
+      <small>Smarter solar care</small>
+      <strong>Every day.</strong>
+      <span>Built around your system</span>
+    </div>
+    <div class="roof"></div>
+    <div class="roofpanel"></div>
+    <div class="house"></div>
+    <div class="window"></div>
+    <div class="door"></div>
+    <div class="leaf"></div>
+    <div class="hills"></div>
+    <div class="hills two"></div>
+    <div class="float-card stat-card">
+      <small>Your solar, looked after</small>
+      <strong>☀ 360° care</strong>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="strip-inner">
+    <div class="strip-item"><span class="strip-icon">⌂</span><div><b>Solar-first solutions</b><small>Made for your setup</small></div></div>
+    <div class="strip-item"><span class="strip-icon">♧</span><div><b>Planned maintenance</b><small>Stay ahead of issues</small></div></div>
+    <div class="strip-item"><span class="strip-icon">▣</span><div><b>Track your service</b><small>Tickets in one place</small></div></div>
+    <div class="strip-item"><span class="strip-icon">↗</span><div><b>Flexible payments</b><small>Online or in person</small></div></div>
+  </div>
+</div>
+
+<section class="content" id="services">
+  <div class="section-head">
+    <div>
+      <div class="kicker">What we do</div>
+      <h2>Everything your solar system needs.</h2>
+    </div>
+    <p>From getting started with solar to keeping your panels in good shape, SGS SOLUTION helps make ownership simpler.</p>
+  </div>
+
+  <div class="services">
+    <article class="service"><div class="service-icon">☀</div><h3>Solar installation</h3><p>Get guidance for a solar setup that fits your property, energy needs and goals.</p><a href="#contact">Discuss your setup ↗</a></article>
+    <article class="service"><div class="service-icon">🛠</div><h3>Maintenance & repair</h3><p>Request a service, follow ticket updates and keep your solar system performing well.</p><a href="#plans">View care plans ↗</a></article>
+    <article class="service"><div class="service-icon">⌁</div><h3>Cleaning & inspection</h3><p>Routine attention for panels and system checks to help identify issues early.</p><a href="#plans">Find your plan ↗</a></article>
+    <article class="service"><div class="service-icon">◷</div><h3>Scheduled solar care</h3><p>Plan-based service reminders help you remember the maintenance your system needs.</p><a href="#plans">Compare plans ↗</a></article>
+    <article class="service"><div class="service-icon">▣</div><h3>Customer service portal</h3><p>Access your plan, available service credits and tickets from your customer account.</p><a href="#" onclick="openModal('login');return false">Open customer login ↗</a></article>
+    <article class="service"><div class="service-icon">♧</div><h3>On-site service team</h3><p>Service partners can record visits and submit work photos for admin review.</p><a href="#" onclick="openModal('partner');return false">Partner access ↗</a></article>
+  </div>
+
+  <div class="solar-image-band">
+    <article class="solar-photo">
+      <img src="https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1200&q=85" alt="Solar panels catching sunlight" loading="lazy">
+      <div class="photo-copy"><small>Clean energy</small><h3>Turn sunlight into power.</h3><p>Solar solutions designed around your home, your needs and your next step.</p></div>
+    </article>
+    <article class="solar-photo">
+      <img src="https://images.unsplash.com/photo-1497440001374-f26997328c1b?auto=format&fit=crop&w=1200&q=85" alt="Solar panels on a roof" loading="lazy">
+      <div class="photo-copy"><small>Long-term care</small><h3>Keep your solar shining.</h3><p>Make maintenance easier with planned service and simple tracking.</p></div>
+    </article>
+  </div>
+</section>
+
+<div class="plans-section" id="plans">
+  <div class="plans-inner">
+    <div class="section-head">
+      <div><div class="kicker">Simple plans. Reliable care.</div><h2>Choose the care your solar deserves.</h2></div>
+      <p>Pick a monthly plan to get started. Plan inclusions and service credits can be managed through your customer account.</p>
+    </div>
+
+    <div class="plans-grid">
+      <article class="plan">
+        <span class="pill">Essential</span>
+        <h3>Essential</h3>
+        <p class="desc">The essentials for regular solar care.</p>
+        <div class="price">₹599 <small>/ month</small></div>
+        <ul><li>Customer service account</li><li>Service ticket requests</li><li>Plan and payment history</li><li>Maintenance reminders</li></ul>
+        <button class="btn btn-dark" onclick="choosePlan('Essential','₹599/month')">Choose Essential ↗</button>
+      </article>
+
+      <article class="plan featured">
+        <span class="pill">Most popular</span>
+        <h3>Solar Care 360</h3>
+        <p class="desc">A more complete care experience for your system.</p>
+        <div class="price">₹999 <small>/ month</small></div>
+        <ul><li>Everything in Essential</li><li>Enhanced service support</li><li>Service credits / tickets</li><li>Visit updates and reminders</li></ul>
+        <button class="btn btn-lime" onclick="choosePlan('Solar Care 360','₹999/month')">Choose Solar Care 360 ↗</button>
+      </article>
+
+      <article class="plan">
+        <span class="pill">Premium</span>
+        <h3>Premium</h3>
+        <p class="desc">Priority-oriented care for customers who need more.</p>
+        <div class="price">₹1,499 <small>/ month</small></div>
+        <ul><li>Everything in Solar Care 360</li><li>Premium service handling</li><li>Service history tracking</li><li>Plan support and reminders</li></ul>
+        <button class="btn btn-dark" onclick="choosePlan('Premium','₹1,499/month')">Choose Premium ↗</button>
+      </article>
+    </div>
+
+    <div class="capacity">
+      <div><h3>Need a capacity-based solar plan?</h3><p>Plan options can be tailored to system size and service requirements.</p></div>
+      <button class="btn btn-outline" onclick="openModal('enquiry')">Get a custom quote ↗</button>
+    </div>
+  </div>
+</div>
+
+<section class="content" id="how">
+  <div class="process">
+    <div class="process-panel">
+      <div class="kicker" style="color:#ffdf3f">Your solar care journey</div>
+      <h3>From choosing a plan to getting service — all in one flow.</h3>
+      <p>Designed to keep customers, service partners and the admin team connected with clear updates and service records.</p>
+      <button class="btn btn-lime" onclick="openModal('register')">Create customer account ↗</button>
+    </div>
+
+    <div class="process-list">
+      <div class="step"><div class="step-no">01</div><div><h4>Choose your plan</h4><p>Compare the care options and register your solar system and contact details.</p></div></div>
+      <div class="step"><div class="step-no">02</div><div><h4>Pay and activate</h4><p>Online payment or an in-person payment flow can be recorded against your account.</p></div></div>
+      <div class="step"><div class="step-no">03</div><div><h4>Request a service</h4><p>Use service tickets and available plan credits to request support when you need it.</p></div></div>
+      <div class="step"><div class="step-no">04</div><div><h4>Track updates</h4><p>Service visit details, work photos and reminders keep everyone in the loop.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta" id="contact">
+  <div><h2>Ready to give your solar system better care?</h2><p>Tell us what you need. We'll help you find the right next step.</p></div>
+  <button class="btn" onclick="openModal('enquiry')">Talk to SGS SOLUTION ↗</button>
+</section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <a href="#" class="brand" style="color:#f8fbe9"><span class="logo">☼</span><span>SGS SOLUTION<small style="color:#ffdf3f">POWERING A BRIGHTER TOMORROW</small></span></a>
+      <p>Solar-first solutions and ongoing care, designed to make looking after your solar system easier.</p>
+    </div>
+    <div class="footer-col"><h4>Explore</h4><a href="#services">Solar services</a><a href="#plans">Care plans</a><a href="#how">How it works</a></div>
+    <div class="footer-col"><h4>Account</h4><a href="#" onclick="openModal('login');return false">Customer login</a><a href="#" onclick="openModal('register');return false">Customer registration</a><a href="#" onclick="openModal('partner');return false">Partner login</a></div>
+    <div class="footer-col"><h4>Support</h4><a href="#contact">Contact us</a><a href="#plans">Plan information</a><a href="#" onclick="openModal('admin');return false">Admin access</a></div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 SGS SOLUTION. All rights reserved.</span><span>Solar care, made simpler. ☀</span></div>
+</footer>
+
+<div class="modal-bg" id="modalBg" onclick="if(event.target===this)closeModal()">
+  <div class="modal">
+    <button class="close" onclick="closeModal()">×</button>
+    <div class="kicker" id="modalKicker">SGS SOLUTION</div>
+    <h2 id="modalTitle">Welcome back</h2>
+    <p id="modalDesc">Access your solar care account.</p>
+    <form id="modalForm" onsubmit="submitDemo(event)">
+      <div id="modalFields"></div>
+      <button class="btn btn-dark" id="modalSubmit" type="submit">Continue ↗</button>
+    </form>
+    <p class="notice" id="modalNotice">Preview mode: accounts, payment verification and automatic WhatsApp/email notifications require a connected backend and provider credentials.</p>
+  </div>
+</div>
+
+<div class="portal-overlay" id="portalOverlay">
+  <header class="portal-top">
+    <div class="portal-brand">
+      <span class="logo">☼</span>
+      <span>SGS SOLUTION<small style="display:block;color:#ffdf3f;font-size:8px;letter-spacing:1.5px">SOLAR CARE PORTAL</small></span>
+    </div>
+    <div class="portal-top-actions">
+      <span id="portalRole" class="portal-status">CUSTOMER</span>
+      <button class="btn btn-outline" style="color:#f8fbe9;border-color:#64708e" onclick="closePortal()">← Website</button>
+    </div>
+  </header>
+  <main class="portal-body" id="portalContent"></main>
+</div>
+
+<!-- PART 3: JavaScript yahan se shuru hoga -->
+
+<script>
+/* =========================================
+   SGS SOLUTION - SINGLE FILE DEMO
+   ========================================= */
+
+const bg = document.getElementById("modalBg");
+const dd = document.getElementById("dropdown");
+let selectedPlan = "";
+
+const storeKey = "sgsSolarPreviewV1";
+
+function emptyDB() {
+  return {
+    customer: null,
+    tickets: [],
+    payments: [],
+    visits: [],
+    notifications: []
+  };
+}
+
+function readDB() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(storeKey));
+    return Object.assign(emptyDB(), saved || {});
+  } catch (error) {
+    return emptyDB();
+  }
+}
+
+function saveDB(db) {
+  try {
+    localStorage.setItem(storeKey, JSON.stringify(db));
+  } catch (error) {
+    alert("Browser storage is full. Try a smaller photo or clear demo data.");
+  }
+}
+
+function uid(prefix) {
+  return prefix + "-" + Math.random().toString(36).slice(2, 7).toUpperCase();
+}
+
+function money(amount) {
+  return "₹" + Number(amount || 0).toLocaleString("en-IN");
+}
+
+function planPrice(name) {
+  if (name === "Essential") return 599;
+  if (name === "Solar Care 360") return 999;
+  if (name === "Premium") return 1499;
+  return 999;
+}
+
+function planCredits(name) {
+  if (name === "Essential") return 1;
+  if (name === "Solar Care 360") return 3;
+  if (name === "Premium") return 5;
+  return 1;
+}
+
+function esc(value) {
+  return String(value ?? "").replace(/[&<>"']/g, char => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  })[char]);
+}
+
+function toggleMenu() {
+  dd.classList.toggle("open");
+}
+
+document.addEventListener("click", event => {
+  if (!event.target.closest(".menu-wrap")) {
+    dd.classList.remove("open");
+  }
+});
+
+function openModal(type) {
+  dd.classList.remove("open");
+  bg.classList.add("show");
+
+  const configs = {
+    login: {
+      kicker: "Customer portal",
+      title: "Welcome back",
+      desc: "Log in to view your solar plan, credits and tickets.",
+      fields: ["Mobile number or email", "Password"],
+      button: "Login"
+    },
+    register: {
+      kicker: "Get started",
+      title: "Create your account",
+      desc: "Register to manage your solar system and service requests.",
+      fields: ["Full name", "Mobile number", "Email address", "Create password"],
+      button: "Create account"
+    },
+    partner: {
+      kicker: "Partner access",
+      title: "Partner / employee login",
+      desc: "Access service visits and submit work updates.",
+      fields: ["Employee ID or mobile", "Password"],
+      button: "Partner login"
+    },
+    admin: {
+      kicker: "Administration",
+      title: "Admin login",
+      desc: "Restricted access for the SGS SOLUTION admin team.",
+      fields: ["Admin email", "Password"],
+      button: "Admin login"
+    },
+    enquiry: {
+      kicker: "Solar consultation",
+      title: "Let's talk solar",
+      desc: "Share your details about your solar requirements.",
+      fields: ["Full name", "Mobile number", "Solar requirement"],
+      button: "Send enquiry"
+    }
+  };
+
+  const config = configs[type] || configs.login;
+
+  document.getElementById("modalKicker").textContent = config.kicker;
+  document.getElementById("modalTitle").textContent = config.title;
+  document.getElementById("modalDesc").textContent = config.desc;
+  document.getElementById("modalSubmit").textContent = config.button + " ↗";
+
+  document.getElementById("modalFields").innerHTML =
+    config.fields.map((field, index) => {
+      let inputType = "text";
+      if (field.toLowerCase().includes("password")) inputType = "password";
+      if (field.toLowerCase().includes("email")) inputType = "email";
+      if (field.toLowerCase().includes("mobile")) inputType = "tel";
+
+      return `
+        <label class="field">
+          <span>${esc(field)}</span>
+          <input
+            type="${inputType}"
+            placeholder="${esc(field)}"
+            ${index === 0 ? "autofocus" : ""}
+            required
+          >
+        </label>`;
+    }).join("");
+}
+
+function closeModal() {
+  bg.classList.remove("show");
+}
+
+function choosePlan(name, price) {
+  selectedPlan = name;
+  openModal("register");
+
+  document.getElementById("modalDesc").textContent =
+    `You selected ${name} (${price}). Create your account to continue.`;
+
+  document.getElementById("modalKicker").textContent =
+    "Selected plan: " + name;
+}
+
+/* =========================================
+   PORTAL NAVIGATION
+   ========================================= */
+
+function openPortal(role = "customer") {
+  const db = readDB();
+
+  document.getElementById("portalOverlay").classList.add("open");
+  document.getElementById("portalRole").textContent = role.toUpperCase();
+
+  if (role === "admin") renderAdmin(db);
+  else if (role === "partner") renderPartner(db);
+  else renderCustomer(db);
+}
+
+function closePortal() {
+  document.getElementById("portalOverlay").classList.remove("open");
+}
+
+/* =========================================
+   CUSTOMER DASHBOARD
+   ========================================= */
+
+function renderCustomer(db) {
+  const customer = db.customer || {
+    name: "Solar Customer",
+    plan: selectedPlan || "",
+    paid: false,
+    credits: 0
+  };
+
+  const paid = Boolean(customer.paid);
+
+  const tickets = db.tickets.length
+    ? db.tickets.slice().reverse().map(ticket => `
+      <div class="portal-row">
+        <div>
+          <b>${esc(ticket.id)} · ${esc(ticket.service)}</b>
+          <small>
+            ${esc(ticket.details || "No extra details")}<br>
+            ${new Date(ticket.created).toLocaleDateString()}
+          </small>
+          ${ticket.photo
+            ? `<img class="portal-photo" src="${ticket.photo}" alt="Service proof">`
+            : ""}
+        </div>
+        <span class="portal-status ${ticket.status === "Completed" ? "ok" : ""}">
+          ${esc(ticket.status)}
+        </span>
+      </div>`).join("")
+    : `<div class="portal-empty">No service tickets yet.</div>`;
+
+  const payments = db.payments.length
+    ? db.payments.slice().reverse().map(payment => `
+      <div class="portal-row">
+        <div>
+          <b>${esc(payment.id)} · ${money(payment.amount)}</b>
+          <small>
+            ${esc(payment.method)} · ${esc(payment.note || "Plan payment")}<br>
+            ${new Date(payment.created).toLocaleDateString()}
+          </small>
+          ${payment.status === "Awaiting customer"
+            ? `<div class="portal-actions">
+                 <button class="portal-action primary"
+                   onclick="customerConfirmPayment('${payment.id}')">
+                   I confirm I paid ↗
+                 </button>
+               </div>`
+            : ""}
+        </div>
+        <span class="portal-status ${payment.status === "Confirmed" ? "ok" : ""}">
+          ${esc(payment.status)}
+        </span>
+      </div>`).join("")
+    : `<div class="portal-empty">No payments recorded.</div>`;
+
+  const notices = db.notifications.length
+    ? db.notifications.slice(-5).reverse().map(note => `
+      <div class="portal-row">
+        <div>
+          <b>${esc(note.title)}</b>
+          <small>${esc(note.message)}</small>
+        </div>
+        <span class="portal-status">${esc(note.date || "Demo")}</span>
+      </div>`).join("")
+    : `<div class="portal-empty">No notifications yet.</div>`;
+
+  document.getElementById("portalContent").innerHTML = `
+    <div class="portal-welcome">
+      <div>
+        <div class="portal-tag">Customer dashboard</div>
+        <h1>Hello, ${esc(customer.name || "Solar Customer")} ☀️</h1>
+        <p>Your plan, service requests, payments and reminders.</p>
+      </div>
+      <button class="portal-action primary" onclick="openServiceForm()">
+        ＋ Claim a service
+      </button>
+    </div>
+
+    <div class="portal-grid">
+      <div class="portal-stat">
+        <span>Current plan</span>
+        <strong style="font-size:19px">${esc(customer.plan || "Not selected")}</strong>
+        <small>${paid ? "● ACTIVE (DEMO)" : "○ NOT ACTIVATED"}</small>
+      </div>
+      <div class="portal-stat">
+        <span>Available credits*</span>
+        <strong>${paid ? Number(customer.credits || 0) : 0}</strong>
+        <small>Demo balance</small>
+      </div>
+      <div class="portal-stat">
+        <span>Open tickets</span>
+        <strong>${db.tickets.filter(t => t.status !== "Completed").length}</strong>
+        <small>Service requests</small>
+      </div>
+      <div class="portal-stat">
+        <span>Payment status</span>
+        <strong style="font-size:20px">${paid ? "Paid" : "Pending"}</strong>
+        <small>Browser preview</small>
+      </div>
+    </div>
+
+    <div class="portal-cols">
+      <section class="portal-panel">
+        <h3>Your solar care plan</h3>
+        <p>${paid
+          ? "Your plan is marked active in this browser demo."
+          : "Choose a plan and try the demo payment flow."}</p>
+
+        ${paid ? `
+          <div class="portal-row">
+            <div>
+              <b>${esc(customer.plan)} plan</b>
+              <small>${money(planPrice(customer.plan))}/month · ${customer.credits || 0} demo credits</small>
+            </div>
+            <span class="portal-status ok">ACTIVE</span>
+          </div>` : `
+          <div class="portal-actions">
+            <button class="portal-action primary"
+              onclick="closePortal();document.getElementById('plans').scrollIntoView({behavior:'smooth'})">
+              Choose a plan ↗
+            </button>
+          </div>`}
+
+        <div class="portal-actions">
+          <button class="portal-action dark" onclick="openServiceForm()">＋ Request service</button>
+          <button class="portal-action" onclick="openPaymentForm()">₹ Make payment</button>
+        </div>
+      </section>
+
+      <section class="portal-panel">
+        <h3>Reminders & notifications</h3>
+        <div class="portal-list">${notices}</div>
+      </section>
+    </div>
+
+    <section class="portal-panel">
+      <h3>Service tickets</h3>
+      <div class="portal-list">${tickets}</div>
+    </section>
+
+    <section class="portal-panel">
+      <h3>Payment history</h3>
+      <div class="portal-list">${payments}</div>
+    </section>
+
+    <p class="portal-note">
+      *Demo credits are illustrative: Essential 1, Solar Care 360 3, Premium 5.
+      No real payment or external notification is processed by this HTML preview.
+    </p>`;
+}
+
+/* =========================================
+   PARTNER / EMPLOYEE DASHBOARD
+   ========================================= */
+
+function renderPartner(db) {
+  document.getElementById("portalContent").innerHTML = `
+    <div class="portal-welcome">
+      <div>
+        <div class="portal-tag">Field team workspace</div>
+        <h1>Partner / Employee Portal</h1>
+        <p>Submit service photos and record offline payment collection.</p>
+      </div>
+    </div>
+
+    <div class="portal-grid">
+      <div class="portal-stat"><span>Service tickets</span><strong>${db.tickets.length}</strong></div>
+      <div class="portal-stat"><span>Work visits</span><strong>${db.visits.length}</strong></div>
+      <div class="portal-stat"><span>Offline payments</span><strong>${db.payments.filter(p => p.method === "Offline").length}</strong></div>
+      <div class="portal-stat"><span>Awaiting confirmation</span><strong>${db.payments.filter(p => p.status === "Awaiting customer").length}</strong></div>
+    </div>
+
+    <div class="portal-cols">
+      <section class="portal-panel">
+        <h3>Submit service visit</h3>
+        <form onsubmit="submitVisit(event)">
+          <label class="portal-field">
+            <span>Ticket</span>
+            <select id="visitTicket" required>
+              ${db.tickets.length
+                ? db.tickets.map(t => `<option value="${esc(t.id)}">${esc(t.id)} — ${esc(t.service)}</option>`).join("")
+                : `<option value="">No tickets available</option>`}
+            </select>
+          </label>
+          <label class="portal-field">
+            <span>Work notes</span>
+            <textarea id="visitNotes" required placeholder="Describe the work completed"></textarea>
+          </label>
+          <label class="portal-field">
+            <span>Upload photo proof (max 2 MB)</span>
+            <input id="visitPhoto" type="file" accept="image/*" required>
+          </label>
+          <button class="portal-action primary" type="submit">Upload proof ↗</button>
+        </form>
+        <p class="portal-note">Photos are stored in this browser demo only.</p>
+      </section>
+
+      <section class="portal-panel">
+        <h3>Record offline payment</h3>
+        <form onsubmit="submitOfflinePayment(event)">
+          <label class="portal-field">
+            <span>Amount (₹)</span>
+            <input id="offlineAmount" type="number" min="1" required>
+          </label>
+          <label class="portal-field">
+            <span>Customer mobile</span>
+            <input id="offlineMobile" type="tel" required>
+          </label>
+          <label class="portal-field">
+            <span>Collected via</span>
+            <select id="offlineType">
+              <option>Cash</option>
+              <option>UPI</option>
+              <option>Bank transfer</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <button class="portal-action primary" type="submit">Record payment ↗</button>
+        </form>
+      </section>
+    </div>
+
+    <section class="portal-panel">
+      <h3>Available service tickets</h3>
+      <div class="portal-list">
+        ${db.tickets.length
+          ? db.tickets.map(t => `
+            <div class="portal-row">
+              <div><b>${esc(t.id)} · ${esc(t.service)}</b><small>${esc(t.details || "")}</small></div>
+              <span class="portal-status">${esc(t.status)}</span>
+            </div>`).join("")
+          : `<div class="portal-empty">No tickets available.</div>`}
+      </div>
+    </section>
+
+    <section class="portal-panel">
+      <h3>Submitted work photos</h3>
+      <div class="portal-list">
+        ${db.visits.length
+          ? db.visits.slice().reverse().map(v => `
+            <div class="portal-row">
+              <div>
+                <b>${esc(v.ticketId)} · Visit submitted</b>
+                <small>${esc(v.notes)}<br>${new Date(v.created).toLocaleString()}</small>
+                ${v.photo ? `<img class="portal-photo" src="${v.photo}" alt="Work photo">` : ""}
+              </div>
+              <span class="portal-status ok">SUBMITTED</span>
+            </div>`).join("")
+          : `<div class="portal-empty">No work photos submitted.</div>`}
+      </div>
+    </section>`;
+}
+
+/* =========================================
+   ADMIN DASHBOARD
+   ========================================= */
+
+function renderAdmin(db) {
+  const paymentTotal = db.payments.reduce((sum, p) => sum + Number(p.amount || 0), 0);
+
+  document.getElementById("portalContent").innerHTML = `
+    <div class="portal-welcome">
+      <div>
+        <div class="portal-tag">Administration</div>
+        <h1>Admin dashboard</h1>
+        <p>Review demo tickets, payment records and field-team submissions.</p>
+      </div>
+      <div class="portal-actions">
+        <button class="portal-action primary" onclick="addMonthlyReminder()">＋ Add reminder</button>
+        <button class="portal-action" onclick="exportDemoData()">Export data ↓</button>
+        <button class="portal-action" onclick="resetDemoData()">Reset demo</button>
+      </div>
+    </div>
+
+    <div class="portal-grid">
+      <div class="portal-stat"><span>Customer account</span><strong>${db.customer ? "1" : "0"}</strong><small>Browser demo</small></div>
+      <div class="portal-stat"><span>Total tickets</span><strong>${db.tickets.length}</strong><small>All requests</small></div>
+      <div class="portal-stat"><span>Payment records</span><strong>${db.payments.length}</strong><small>Recorded entries</small></div>
+      <div class="portal-stat"><span>Recorded amount</span><strong>${money(paymentTotal)}</strong><small>Not verified revenue</small></div>
+    </div>
+
+    <section class="portal-panel">
+      <h3>Customer details</h3>
+      ${db.customer ? `
+        <div class="portal-row">
+          <div>
+            <b>${esc(db.customer.name)}</b>
+            <small>${esc(db.customer.mobile || "No mobile")} · ${esc(db.customer.email || "No email")}<br>
+            Plan: ${esc(db.customer.plan || "None")}</small>
+          </div>
+          <span class="portal-status ${db.customer.paid ? "ok" : ""}">
+            ${db.customer.paid ? "ACTIVE (DEMO)" : "PENDING"}
+          </span>
+        </div>` : `<div class="portal-empty">No customer account created yet.</div>`}
+    </section>
+
+    <section class="portal-panel">
+      <h3>Service tickets — update status</h3>
+      <div class="portal-list">
+        ${db.tickets.length
+          ? db.tickets.slice().reverse().map(t => `
+            <div class="portal-row">
+              <div>
+                <b>${esc(t.id)} · ${esc(t.service)}</b>
+                <small>${esc(t.details || "")}<br>${new Date(t.created).toLocaleString()}</small>
+                ${t.photo ? `<img class="portal-photo" src="${t.photo}" alt="Service photo">` : ""}
+                <div class="portal-actions">
+                  <button class="portal-action" onclick="setTicketStatus('${t.id}','Requested')">Requested</button>
+                  <button class="portal-action" onclick="setTicketStatus('${t.id}','In progress')">In progress</button>
+                  <button class="portal-action primary" onclick="setTicketStatus('${t.id}','Completed')">Completed ✓</button>
+                </div>
+              </div>
+              <span class="portal-status ${t.status === "Completed" ? "ok" : ""}">${esc(t.status)}</span>
+            </div>`).join("")
+          : `<div class="portal-empty">No service tickets yet.</div>`}
+      </div>
+    </section>
+
+    <section class="portal-panel">
+      <h3>Payment records</h3>
+      <div class="portal-list">
+        ${db.payments.length
+          ? db.payments.slice().reverse().map(p => `
+            <div class="portal-row">
+              <div>
+                <b>${esc(p.id)} · ${money(p.amount)}</b>
+                <small>${esc(p.method)} · ${esc(p.note || "")}<br>Customer: ${esc(p.customerMobile || "Demo account")}</small>
+              </div>
+              <span class="portal-status ${p.status === "Confirmed" ? "ok" : ""}">${esc(p.status)}</span>
+            </div>`).join("")
+          : `<div class="portal-empty">No payments recorded.</div>`}
+      </div>
+    </section>
+
+    <section class="portal-panel">
+      <h3>Field-team photo submissions</h3>
+      <div class="portal-list">
+        ${db.visits.length
+          ? db.visits.slice().reverse().map(v => `
+            <div class="portal-row">
+              <div>
+                <b>${esc(v.ticketId)} · Visit submitted</b>
+                <small>${esc(v.notes)}<br>${new Date(v.created).toLocaleString()}</small>
+                ${v.photo ? `<img class="portal-photo" src="${v.photo}" alt="Employee photo proof">` : ""}
+              </div>
+              <span class="portal-status ok">SUBMITTED</span>
+            </div>`).join("")
+          : `<div class="portal-empty">No employee photo reports yet.</div>`}
+      </div>
+    </section>
+
+    <p class="portal-note">
+      Admin access is simulated. Do not use this browser-only dashboard for real customer data,
+      payment approval or production security.
+    </p>`;
+}
+
+/* =========================================
+   SERVICE TICKETS
+   ========================================= */
+
+function openServiceForm() {
+  const db = readDB();
+
+  if (!db.customer || !db.customer.paid) {
+    alert("Activate a plan first in this demo.");
+    openPaymentForm();
+    return;
+  }
+
+  const oldForm = document.getElementById("serviceFormPanel");
+  if (oldForm) oldForm.remove();
+
+  document.getElementById("portalContent").insertAdjacentHTML("afterbegin", `
+    <section class="portal-panel" id="serviceFormPanel">
+      <h3>Claim a service</h3>
+      <form onsubmit="createTicket(event)">
+        <label class="portal-field">
+          <span>Service requested</span>
+          <select id="claimService">
+            <option>Panel cleaning</option>
+            <option>System inspection</option>
+            <option>Maintenance / repair</option>
+            <option>Installation consultation</option>
+            <option>Other support</option>
+          </select>
+        </label>
+        <label class="portal-field">
+          <span>Details</span>
+          <textarea id="claimDetails" placeholder="Tell us what you need"></textarea>
+        </label>
+        <div class="portal-actions">
+          <button class="portal-action primary" type="submit">Create ticket ↗</button>
+          <button class="portal-action" type="button"
+            onclick="document.getElementById('serviceFormPanel').remove()">Cancel</button>
+        </div>
+      </form>
+    </section>`);
+
+  document.getElementById("serviceFormPanel").scrollIntoView({ behavior: "smooth" });
+}
+
+function createTicket(event) {
+  event.preventDefault();
+
+  const db = readDB();
+
+  if (!db.customer || !db.customer.paid) {
+    alert("Activate a plan first.");
+    return;
+  }
+
+  if (Number(db.customer.credits || 0) <= 0) {
+    alert("No demo credits remain. Contact the administrator.");
+    return;
+  }
+
+  const ticket = {
+    id: uid("TKT"),
+    service: document.getElementById("claimService").value,
+    details: document.getElementById("claimDetails").value,
+    status: "Requested",
+    created: new Date().toISOString()
+  };
+
+  db.tickets.push(ticket);
+  db.customer.credits--;
+  db.notifications.push({
+    title: "Service ticket created",
+    message: ticket.id + " · " + ticket.service,
+    date: "Just now"
+  });
+
+  saveDB(db);
+  renderCustomer(db);
+  alert("Demo ticket created. No external message was sent.");
+}
+
+/* =========================================
+   PAYMENT DEMO
+   ========================================= */
+
+function openPaymentForm() {
+  const db = readDB();
+  const customer = db.customer || {};
+  const plan = customer.plan || selectedPlan || "Essential";
+
+  const oldForm = document.getElementById("paymentFormPanel");
+  if (oldForm) oldForm.remove();
+
+  document.getElementById("portalContent").insertAdjacentHTML("afterbegin", `
+    <section class="portal-panel" id="paymentFormPanel">
+      <h3>Payment & plan activation</h3>
+      <p>Plan: <b>${esc(plan)}</b> · ${money(planPrice(plan))}/month</p>
+      <form onsubmit="submitOnlineDemo(event)">
+        <label class="portal-field">
+          <span>Payment option</span>
+          <select id="payMethod">
+            <option value="Online">Online payment (demo)</option>
+            <option value="Offline">Offline / employee collection</option>
+          </select>
+        </label>
+        <p class="portal-note">
+          Demo only: no money is charged. Real online payment requires a gateway and
+          server-side verification.
+        </p>
+        <div class="portal-actions">
+          <button class="portal-action primary" type="submit">Continue ↗</button>
+          <button class="portal-action" type="button"
+            onclick="document.getElementById('paymentFormPanel').remove()">Cancel</button>
+        </div>
+      </form>
+    </section>`);
+
+  document.getElementById("paymentFormPanel").scrollIntoView({ behavior: "smooth" });
+}
+
+function submitOnlineDemo(event) {
+  event.preventDefault();
+
+  if (document.getElementById("payMethod").value === "Offline") {
+    alert("Use Partner / Employee login to record an offline payment in this demo.");
+    return;
+  }
+
+  const db = readDB();
+
+  if (!db.customer) {
+    db.customer = {
+      name: "Solar Customer",
+      mobile: "",
+      email: "",
+      plan: selectedPlan || "Essential",
+      paid: false,
+      credits: 0
+    };
+  }
+
+  if (!db.customer.plan) {
+    db.customer.plan = selectedPlan || "Essential";
+  }
+
+  const amount = planPrice(db.customer.plan);
+
+  db.customer.paid = true;
+  db.customer.credits = planCredits(db.customer.plan);
+
+  db.payments.push({
+    id: uid("PAY"),
+    amount,
+    method: "Online (demo)",
+    status: "Confirmed",
+    note: db.customer.plan + " monthly plan",
+    created: new Date().toISOString()
+  });
+
+  db.notifications.push({
+    title: "Plan activated",
+    message: db.customer.plan + " activated in preview",
+    date: "Just now"
+  });
+
+  saveDB(db);
+  renderCustomer(db);
+
+  alert("Demo payment recorded. No real money was charged and no email/WhatsApp was sent.");
+}
+
+function submitOfflinePayment(event) {
+  event.preventDefault();
+
+  const db = readDB();
+
+  const payment = {
+    id: uid("PAY"),
+    amount: Number(document.getElementById("offlineAmount").value),
+    method: "Offline",
+    status: "Awaiting customer",
+    note: "Collected by employee · " + document.getElementById("offlineType").value,
+    customerMobile: document.getElementById("offlineMobile").value,
+    created: new Date().toISOString()
+  };
+
+  db.payments.push(payment);
+  db.notifications.push({
+    title: "Payment confirmation needed",
+    message: money(payment.amount) + " offline payment awaits customer confirmation",
+    date: "Just now"
+  });
+
+  saveDB(db);
+  renderPartner(db);
+
+  alert("Payment recorded in the demo and awaiting customer confirmation.");
+}
+
+function customerConfirmPayment(id) {
+  const db = readDB();
+  const payment = db.payments.find(item => item.id === id);
+
+  if (!payment || payment.status !== "Awaiting customer") return;
+
+  payment.status = "Confirmed";
+
+  if (db.customer) {
+    db.customer.paid = true;
+    db.customer.plan = db.customer.plan || selectedPlan || "Essential";
+    db.customer.credits = Math.max(
+      Number(db.customer.credits || 0),
+      planCredits(db.customer.plan)
+    );
+  }
+
+  db.notifications.push({
+    title: "Payment confirmed",
+    message: "You confirmed payment " + payment.id,
+    date: "Just now"
+  });
+
+  saveDB(db);
+  renderCustomer(db);
+
+  alert("Payment confirmation saved in the browser demo.");
+}
+
+/* =========================================
+   EMPLOYEE PHOTO PROOF
+   ========================================= */
+
+function submitVisit(event) {
+  event.preventDefault();
+
+  const fileInput = document.getElementById("visitPhoto");
+  const file = fileInput.files[0];
+  const ticketId = document.getElementById("visitTicket").value;
+
+  if (!file || !ticketId) {
+    alert("Choose a ticket and photo.");
+    return;
+  }
+
+  if (!file.type.startsWith("image/")) {
+    alert("Please choose an image file.");
+    return;
+  }
+
+  if (file.size > 2 * 1024 * 1024) {
+    alert("For this demo, choose an image under 2 MB.");
+    return;
+  }
+
+  const reader = new FileReader();
+
+  reader.onload = () => {
+    const db = readDB();
+    const notes = document.getElementById("visitNotes").value;
+
+    db.visits.push({
+      ticketId,
+      notes,
+      photo: reader.result,
+      created: new Date().toISOString()
+    });
+
+    const ticket = db.tickets.find(item => item.id === ticketId);
+
+    if (ticket) {
+      ticket.photo = reader.result;
+      ticket.visitNotes = notes;
+      ticket.status = "Work submitted";
+    }
+
+    db.notifications.push({
+      title: "Work photo submitted",
+      message: "Photo proof submitted for " + ticketId,
+      date: "Just now"
+    });
+
+    saveDB(db);
+    renderPartner(db);
+
+    alert("Photo saved in the browser demo. WhatsApp notification is not connected.");
+  };
+
+  reader.onerror = () => alert("Could not read this image. Please try another file.");
+  reader.readAsDataURL(file);
+}
+
+/* =========================================
+   ADMIN ACTIONS
+   ========================================= */
+
+function setTicketStatus(id, status) {
+  const db = readDB();
+  const ticket = db.tickets.find(item => item.id === id);
+
+  if (ticket) {
+    ticket.status = status;
+    db.notifications.push({
+      title: "Service ticket update",
+      message: id + " marked " + status,
+      date: "Just now"
+    });
+  }
+
+  saveDB(db);
+  renderAdmin(db);
+}
+
+function addMonthlyReminder() {
+  const db = readDB();
+
+  db.notifications.push({
+    title: "Monthly solar care reminder",
+    message: "Please check your panels and schedule maintenance if needed.",
+    date: new Date().toLocaleDateString()
+  });
+
+  saveDB(db);
+  renderAdmin(db);
+
+  alert("Reminder added to the demo. Automatic monthly delivery needs a backend scheduler.");
+}
+
+function exportDemoData() {
+  const blob = new Blob(
+    [JSON.stringify(readDB(), null, 2)],
+    { type: "application/json" }
+  );
+
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+
+  link.href = url;
+  link.download = "sgs-solution-preview-data.json";
+  link.click();
+
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+
+function resetDemoData() {
+  if (!confirm("Clear all locally saved SGS SOLUTION preview data?")) return;
+
+  localStorage.removeItem(storeKey);
+  renderAdmin(readDB());
+}
+
+/* =========================================
+   MODAL FORM HANDLING
+   ========================================= */
+
+function submitDemo(event) {
+  event.preventDefault();
+
+  const type = document.getElementById("modalKicker")
+    .textContent.toLowerCase();
+
+  const inputs = [
+    ...document.querySelectorAll("#modalFields input")
+  ].map(input => input.value.trim());
+
+  if (type.includes("get started") || type.includes("selected plan")) {
+    const db = readDB();
+    const old = db.customer || {};
+
+    db.customer = {
+      name: inputs[0] || old.name || "Solar Customer",
+      mobile: inputs[1] || old.mobile || "",
+      email: inputs[2] || old.email || "",
+      plan: selectedPlan || old.plan || "",
+      paid: old.paid || false,
+      credits: old.credits || 0,
+      joined: old.joined || new Date().toISOString()
+    };
+
+    saveDB(db);
+    closeModal();
+    openPortal("customer");
+
+    if (!db.customer.paid) {
+      setTimeout(() => {
+        if (confirm("Account created in the demo. Try demo payment now?")) {
+          openPaymentForm();
+        }
+      }, 150);
+    }
+
+    return;
+  }
+
+  if (type.includes("customer portal") || type.includes("welcome back")) {
+    const db = readDB();
+
+    if (!db.customer) {
+      db.customer = {
+        name: "Solar Customer",
+        mobile: inputs[0] || "",
+        email: (inputs[0] || "").includes("@") ? inputs[0] : "",
+        plan: selectedPlan || "",
+        paid: false,
+        credits: 0,
+        joined: new Date().toISOString()
+      };
+
+      saveDB(db);
+    }
+
+    closeModal();
+    openPortal("customer");
+    return;
+  }
+
+  if (type.includes("partner access")) {
+    closeModal();
+    openPortal("partner");
+    return;
+  }
+
+  if (type.includes("administration") || type.includes("admin")) {
+    closeModal();
+    openPortal("admin");
+    return;
+  }
+
+  if (type.includes("solar consultation")) {
+    const db = readDB();
+
+    db.notifications.push({
+      title: "Solar enquiry received",
+      message: "Enquiry from " + (inputs[0] || "website visitor") +
+        " · " + (inputs[2] || "Solar requirement"),
+      date: "Just now"
+    });
+
+    saveDB(db);
+    closeModal();
+
+    alert("Enquiry saved in this browser demo only. No external email was sent.");
+    return;
+  }
+
+  closeModal();
+}
+
+/* =========================================
+   REVEAL ANIMATIONS
+   ========================================= */
+
+const revealStyle = document.createElement("style");
+
+revealStyle.textContent = `
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .65s ease, transform .65s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+@media(prefers-reduced-motion:reduce) {
+  .reveal,.reveal.visible {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}`;
+
+document.head.appendChild(revealStyle);
+
+const revealTargets = document.querySelectorAll(
+  ".service,.plan,.section-head,.step,.process-panel,.solar-photo,.capacity,.cta"
+);
+
+revealTargets.forEach(element => element.classList.add("reveal"));
+
+if ("IntersectionObserver" in window) {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  revealTargets.forEach(element => observer.observe(element));
+} else {
+  revealTargets.forEach(element => element.classList.add("visible"));
+}
+
+const heroVisual = document.querySelector(".visual");
+
+if (heroVisual && window.matchMedia("(hover:hover) and (pointer:fine)").matches) {
+  heroVisual.addEventListener("mousemove", event => {
+    const rect = heroVisual.getBoundingClientRect();
+    const x = (event.clientX - rect.left) / rect.width - 0.5;
+    const y = (event.clientY - rect.top) / rect.height - 0.5;
+
+    heroVisual.style.backgroundPosition =
+      `${50 + x * 4}% ${50 + y * 4}%`;
+  });
+
+  heroVisual.addEventListener("mouseleave", () => {
+    heroVisual.style.backgroundPosition = "center";
+  });
+}
+</script>
+
+</body>
+</html>

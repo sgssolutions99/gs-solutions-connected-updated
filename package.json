@@ -1,0 +1,31 @@
+{
+  "name": "sgs-solution-solar-care",
+  "version": "1.0.0",
+  "description": "Full-stack solar and CCTV installation and maintenance platform for SGS SOLUTION",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "check": "node --check server.js && node --check public/app.js && node --check public/backend-integration.js && node scripts/check-inline-js.js",
+    "check:html": "node scripts/check-inline-js.js"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "better-sqlite3": "^11.8.1",
+    "compression": "^1.7.4",
+    "cors": "^2.8.6",
+    "dotenv": "^16.6.1",
+    "express": "^4.22.3",
+    "express-rate-limit": "^7.5.1",
+    "helmet": "^8.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.11.2",
+    "multer": "^1.4.5-lts.1",
+    "node-cron": "^4.6.0",
+    "nodemailer": "^10.1.7",
+    "razorpay": "^2.9.6"
+  }
+}
